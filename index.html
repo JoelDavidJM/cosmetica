@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Vick Cosmétics - Beleza que realça sua essência. Cosméticos originais com atendimento personalizado e entrega rápida." />
+  <meta name="keywords" content="cosméticos, beleza, maquiagem, skincare, produtos originais, Vick Cosmétics" />
+  <meta property="og:title" content="Vick Cosmétics — Beleza que realça sua essência" />
+  <meta property="og:description" content="Produtos originais, entrega rápida e atendimento personalizado. Descubra sua beleza com a Vick Cosmétics." />
+  <meta property="og:type" content="website" />
+  <title>Vick Cosmétics — Beleza que realça sua essência</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rose: #E8A4B4;
+      --rose-light: #F5D6DF;
+      --rose-pale: #FDF0F3;
+      --rose-deep: #C97A91;
+      --rose-dark: #8B4F63;
+      --nude: #E8D5C4;
+      --nude-light: #F5EDE4;
+      --nude-pale: #FBF7F4;
+      --gold: #C9A96E;
+      --gold-light: #E8D5A8;
+      --white: #FFFFFF;
+      --off-white: #FEFCFB;
+      --gray-100: #F8F6F5;
+      --gray-200: #EDE8E5;
+      --gray-400: #B8ADA8;
+      --gray-600: #7A6E6A;
+      --gray-800: #3D3330;
+      --text-dark: #2A1F1C;
+      --text-mid: #6B5550;
+      --text-light: #A89590;
+      --shadow-soft: 0 4px 24px rgba(180,110,130,0.10);
+      --shadow-card: 0 8px 32px rgba(180,110,130,0.12);
+      --shadow-hover: 0 16px 48px rgba(180,110,130,0.20);
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 40px;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Jost', system-ui, sans-serif;
+      --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-dark);
+      background: var(--off-white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── UTILITY ─── */
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rose-deep);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+    .section-title em { font-style: italic; color: var(--rose-deep); }
+    .fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* ─── NAVBAR ─── */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 18px 0;
+      transition: var(--transition);
+    }
+    #navbar.scrolled {
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 20px rgba(180,110,130,0.10);
+      padding: 12px 0;
+    }
+    #navbar .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: var(--transition);
+    }
+    #navbar.scrolled .nav-logo { color: var(--rose-dark); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    #navbar.scrolled .nav-links a { color: var(--text-mid); }
+    .nav-links a:hover { color: var(--rose-deep) !important; }
+    .nav-cta {
+      background: var(--white);
+      color: var(--rose-dark) !important;
+      padding: 9px 22px;
+      border-radius: 50px;
+      font-weight: 600 !important;
+      font-size: 12px !important;
+      letter-spacing: 0.08em !important;
+      text-transform: uppercase;
+      box-shadow: 0 2px 12px rgba(200,100,130,0.2);
+      transition: var(--transition) !important;
+    }
+    .nav-cta:hover { background: var(--rose-pale) !important; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(200,100,130,0.3); }
+    #navbar.scrolled .nav-cta { background: var(--rose-deep); color: var(--white) !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: var(--transition); }
+    #navbar.scrolled .hamburger span { background: var(--text-dark); }
+    #mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      background: var(--white);
+      border-top: 1px solid var(--gray-200);
+      box-shadow: 0 8px 24px rgba(180,110,130,0.12);
+    }
+    #mobile-menu.open { display: flex; }
+    #mobile-menu a {
+      padding: 16px 24px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-mid);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gray-200);
+      transition: var(--transition);
+    }
+    #mobile-menu a:hover { color: var(--rose-deep); background: var(--rose-pale); }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100svh;
+      background: linear-gradient(135deg, #B06480 0%, #C97A91 35%, #E8A4B4 65%, #EEC5CF 100%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: 100px 0 60px;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='1.5' fill='rgba(255,255,255,0.12)'/%3E%3C/svg%3E") repeat;
+      opacity: 0.6;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative; z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.35);
+      backdrop-filter: blur(8px);
+      border-radius: 50px;
+      padding: 8px 18px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.10em;
+      color: var(--white);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero-badge i { font-size: 10px; }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .hero-title strong {
+      font-weight: 500;
+      display: block;
+    }
+    .hero-title em {
+      font-style: italic;
+      font-weight: 300;
+      display: block;
+      font-size: 0.85em;
+      opacity: 0.88;
+    }
+    .hero-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      max-width: 420px;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 50px;
+      padding: 15px 32px;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+    }
+    .btn-primary {
+      background: var(--white);
+      color: var(--rose-dark);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    .btn-primary:hover { background: var(--nude-light); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.18); }
+    .btn-whatsapp {
+      background: #25D366;
+      color: var(--white);
+      box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+    }
+    .btn-whatsapp:hover { background: #1da851; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37,211,102,0.45); }
+    .btn-outline-white {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,0.6);
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.12); border-color: var(--white); }
+    .btn-rose {
+      background: var(--rose-deep);
+      color: var(--white);
+      box-shadow: var(--shadow-soft);
+    }
+    .btn-rose:hover { background: var(--rose-dark); transform: translateY(-2px); box-shadow: var(--shadow-card); }
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-img-frame {
+      position: relative;
+      width: 420px; height: 480px;
+    }
+    .hero-img-frame::before {
+      content: '';
+      position: absolute;
+      top: -16px; right: -16px;
+      width: 100%; height: 100%;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: var(--radius-lg);
+    }
+    .hero-img-main {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+    }
+    .hero-floating-card {
+      position: absolute;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-radius: var(--radius-md);
+      padding: 14px 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    }
+    .hero-floating-card.card-1 {
+      bottom: 32px; left: -28px;
+    }
+    .hero-floating-card.card-2 {
+      top: 40px; right: -28px;
+    }
+    .fcard-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-light); margin-bottom: 4px; }
+    .fcard-value { font-family: var(--font-display); font-size: 1.4rem; font-weight: 500; color: var(--rose-dark); }
+    .fcard-stars { color: #F9C846; font-size: 12px; letter-spacing: 1px; margin-top: 2px; }
+    .hero-scroll {
+      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.7); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      text-decoration: none; transition: var(--transition);
+    }
+    .hero-scroll:hover { color: var(--white); }
+    .scroll-line {
+      width: 1px; height: 32px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.5), rgba(255,255,255,0));
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse { 0%,100%{opacity:0.5;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.2)} }
+
+    /* ─── TRUST BAR ─── */
+    #trust-bar {
+      background: var(--white);
+      border-top: 1px solid var(--gray-200);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 20px 0;
+    }
+    .trust-list {
+      display: flex; flex-wrap: wrap;
+      align-items: center; justify-content: center;
+      gap: 0; list-style: none;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 9px;
+      padding: 10px 24px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-mid);
+      border-right: 1px solid var(--gray-200);
+    }
+    .trust-item:last-child { border-right: none; }
+    .trust-item i { color: var(--rose-deep); font-size: 15px; }
+
+    /* ─── ABOUT ─── */
+    #about { padding: 100px 0; background: var(--off-white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-imgs {
+      position: relative;
+      height: 500px;
+    }
+    .about-img-bg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 75%;
+      height: 85%;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+    }
+    .about-img-fg {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 55%;
+      height: 60%;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-hover);
+      border: 6px solid var(--white);
+    }
+    .about-accent {
+      position: absolute;
+      top: 30%;
+      left: 60%;
+      width: 64px; height: 64px;
+      background: var(--rose-light);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; color: var(--rose-dark);
+      box-shadow: var(--shadow-soft);
+    }
+    .about-content { display: flex; flex-direction: column; gap: 20px; }
+    .about-content p {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.8;
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 12px;
+    }
+    .stat-item {
+      padding: 20px;
+      background: var(--rose-pale);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--rose-light);
+      text-align: center;
+    }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: var(--rose-deep);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-top: 6px;
+    }
+
+    /* ─── PRODUCTS ─── */
+    #products { padding: 100px 0; background: var(--gray-100); }
+    .section-header {
+      text-align: center;
+      max-width: 520px;
+      margin: 0 auto 56px;
+    }
+    .section-header p {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.7;
+      margin-top: 14px;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .product-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: var(--transition);
+      border: 1px solid var(--gray-200);
+    }
+    .product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+    .product-img-wrap {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 3/3.4;
+      background: var(--nude-pale);
+    }
+    .product-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+    .product-card:hover .product-img-wrap img { transform: scale(1.08); }
+    .product-badge {
+      position: absolute; top: 14px; left: 14px;
+      background: var(--rose-deep);
+      color: var(--white);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 50px;
+    }
+    .product-badge.new { background: var(--rose-dark); }
+    .product-badge.sale { background: var(--gold); }
+    .product-actions-hover {
+      position: absolute; bottom: 12px; left: 12px; right: 12px;
+      display: flex; gap: 8px;
+      transform: translateY(12px);
+      opacity: 0;
+      transition: var(--transition);
+    }
+    .product-card:hover .product-actions-hover { transform: none; opacity: 1; }
+    .product-actions-hover a, .product-actions-hover button {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center; gap: 7px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+    }
+    .btn-buy-card { background: var(--rose-deep); color: var(--white); }
+    .btn-buy-card:hover { background: var(--rose-dark); }
+    .btn-wpp-card { background: #25D366; color: var(--white); }
+    .btn-wpp-card:hover { background: #1da851; }
+    .product-info { padding: 18px 18px 20px; }
+    .product-cat {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 6px;
+    }
+    .product-name {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .product-price-row {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .product-price {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--rose-dark);
+    }
+    .product-old-price {
+      font-size: 13px;
+      color: var(--text-light);
+      text-decoration: line-through;
+      margin-left: 8px;
+    }
+    .product-stars { color: #F9C846; font-size: 11px; }
+
+    /* ─── BENEFITS ─── */
+    #benefits { padding: 100px 0; background: var(--white); }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+    }
+    .benefit-card {
+      text-align: center;
+      padding: 40px 24px;
+      border-radius: var(--radius-lg);
+      background: var(--rose-pale);
+      border: 1px solid var(--rose-light);
+      transition: var(--transition);
+    }
+    .benefit-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-card); background: var(--white); }
+    .benefit-icon {
+      width: 64px; height: 64px;
+      background: var(--rose-light);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 22px;
+      color: var(--rose-dark);
+      transition: var(--transition);
+    }
+    .benefit-card:hover .benefit-icon { background: var(--rose-deep); color: var(--white); }
+    .benefit-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+    .benefit-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    #testimonials { padding: 100px 0; background: var(--gray-100); }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .testimonial-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--gray-200);
+      transition: var(--transition);
+      position: relative;
+    }
+    .testimonial-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+    .testimonial-card::before {
+      content: '\201C';
+      position: absolute;
+      top: 24px; right: 28px;
+      font-family: var(--font-display);
+      font-size: 5rem;
+      line-height: 1;
+      color: var(--rose-light);
+    }
+    .t-stars { color: #F9C846; font-size: 14px; margin-bottom: 16px; letter-spacing: 2px; }
+    .t-text {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.8;
+      font-style: italic;
+      margin-bottom: 24px;
+    }
+    .t-author { display: flex; align-items: center; gap: 14px; }
+    .t-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--rose-light);
+    }
+    .t-name { font-size: 14px; font-weight: 600; color: var(--text-dark); }
+    .t-desc { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+
+    /* ─── CTA SECTION ─── */
+    #cta {
+      padding: 100px 0;
+      background: linear-gradient(135deg, #B06480 0%, #C97A91 50%, #E8A4B4 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    #cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='40' cy='40' r='1.5' fill='rgba(255,255,255,0.12)'/%3E%3C/svg%3E") repeat;
+    }
+    .cta-inner { text-align: center; position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+    .cta-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 50px;
+      padding: 8px 20px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .cta-title em { font-style: italic; }
+    .cta-sub {
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+    .cta-actions { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+    .btn-cta-wpp {
+      background: #25D366;
+      color: var(--white);
+      padding: 17px 40px;
+      font-size: 14px;
+      box-shadow: 0 6px 28px rgba(37,211,102,0.4);
+    }
+    .btn-cta-wpp:hover { background: #1da851; transform: translateY(-3px); box-shadow: 0 10px 36px rgba(37,211,102,0.5); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--gray-800);
+      padding: 60px 0 28px;
+      color: var(--gray-400);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand { display: flex; flex-direction: column; gap: 16px; }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .footer-tagline { font-size: 13px; font-weight: 300; line-height: 1.7; color: var(--gray-400); }
+    .footer-social { display: flex; gap: 10px; margin-top: 8px; }
+    .social-btn {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gray-400);
+      text-decoration: none;
+      font-size: 14px;
+      transition: var(--transition);
+    }
+    .social-btn:hover { background: var(--rose-deep); border-color: var(--rose-deep); color: var(--white); transform: translateY(-2px); }
+    .footer-col-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--gray-400);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .footer-links a:hover { color: var(--rose-light); }
+    .footer-contact-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      margin-bottom: 14px;
+      font-size: 13px; font-weight: 300; line-height: 1.5;
+    }
+    .footer-contact-item i { color: var(--rose-deep); margin-top: 2px; flex-shrink: 0; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--gray-600);
+    }
+
+    /* ─── FLOATING WPP ─── */
+    #wpp-float {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      width: 58px; height: 58px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+      color: var(--white);
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+      z-index: 999;
+      transition: var(--transition);
+    }
+    #wpp-float:hover { background: #1da851; transform: scale(1.1); box-shadow: 0 8px 32px rgba(37,211,102,0.55); }
+    #wpp-float::before {
+      content: '';
+      position: absolute;
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      background: #25D366;
+      animation: wppPulse 2.4s ease-out infinite;
+      z-index: -1;
+    }
+    @keyframes wppPulse { 0%{opacity:0.7;transform:scale(1)} 100%{opacity:0;transform:scale(1.7)} }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .hero-img-frame { width: 340px; height: 400px; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-visual { display: none; }
+      .hero-sub { margin: 0 auto 36px; }
+      .hero-actions { justify-content: center; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-imgs { height: 320px; }
+      .about-stats { grid-template-columns: repeat(3, 1fr); }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+      .trust-item { border-right: none; border-bottom: 1px solid var(--gray-200); width: 100%; justify-content: center; }
+      .trust-item:last-child { border-bottom: none; }
+    }
+    @media (max-width: 480px) {
+      .products-grid { grid-template-columns: 1fr; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 2.4rem; }
+      .about-stats { grid-template-columns: 1fr; }
+    }
+
+    /* ─── PRODUCT PLACEHOLDER IMAGES ─── */
+    .placeholder-img {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 10px;
+      color: var(--rose-deep); font-size: 13px; font-weight: 400;
+    }
+    .placeholder-img i { font-size: 2.5rem; opacity: 0.5; }
+
+    /* ─── ABOUT PLACEHOLDER ─── */
+    .about-img-placeholder {
+      width: 100%; height: 100%;
+      background: var(--nude-pale);
+      border-radius: var(--radius-lg);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 12px;
+      color: var(--rose-deep); text-align: center; padding: 24px;
+    }
+    .about-img-placeholder i { font-size: 3rem; opacity: 0.4; }
+    .about-img-placeholder span { font-size: 12px; color: var(--text-light); }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<header>
+  <nav id="navbar" role="navigation" aria-label="Navegação principal">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#" class="nav-logo" aria-label="Vick Cosmétics - Início">Vick Cosmétics</a>
+        <ul class="nav-links" role="list">
+          <li><a href="#about">Sobre</a></li>
+          <li><a href="#products">Produtos</a></li>
+          <li><a href="#benefits">Benefícios</a></li>
+          <li><a href="#testimonials">Avaliações</a></li>
+          <li><a href="https://wa.me/5500000000000" class="nav-cta" aria-label="Falar via WhatsApp"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+        </ul>
+        <button class="hamburger" aria-label="Abrir menu" aria-expanded="false" id="hamburger-btn">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" role="navigation" aria-label="Menu mobile">
+      <a href="#about">Sobre a Loja</a>
+      <a href="#products">Produtos</a>
+      <a href="#benefits">Benefícios</a>
+      <a href="#testimonials">Avaliações</a>
+      <a href="https://wa.me/5500000000000"><i class="fab fa-whatsapp"></i> &nbsp;Falar pelo WhatsApp</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ── HERO ── -->
+<section id="hero" aria-label="Seção principal">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-star" aria-hidden="true"></i>
+          Produtos 100% Originais
+        </div>
+        <h1 class="hero-title">
+          <strong>Vick Cosmétics</strong>
+          <em>Beleza que realça<br>sua essência</em>
+        </h1>
+        <p class="hero-sub">
+          Descubra cosméticos originais selecionados para valorizar cada detalhe de você. Qualidade, elegância e cuidado em cada produto.
+        </p>
+        <div class="hero-actions">
+          <a href="#products" class="btn btn-primary" aria-label="Ver catálogo de produtos">
+            <i class="fas fa-sparkles" aria-hidden="true"></i>
+            Ver Produtos
+          </a>
+          <a href="https://wa.me/5500000000000" class="btn btn-whatsapp" target="_blank" rel="noopener" aria-label="Falar agora pelo WhatsApp">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+            Falar Agora
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-img-frame">
+          <div style="width:100%;height:100%;background:linear-gradient(145deg,#F5D6DF,#E8A4B4,#C97A91);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;color:rgba(255,255,255,0.8);">
+            <i class="fas fa-spa" style="font-size:4rem;opacity:0.7;"></i>
+            <span style="font-family:var(--font-display);font-size:1.3rem;font-style:italic;text-align:center;padding:0 24px;">Beleza &amp; Elegância</span>
+          </div>
+          <div class="hero-floating-card card-1">
+            <div class="fcard-label">Clientes felizes</div>
+            <div class="fcard-value">+2.500</div>
+            <div class="fcard-stars">★★★★★</div>
+          </div>
+          <div class="hero-floating-card card-2">
+            <div class="fcard-label">Avaliação média</div>
+            <div class="fcard-value">4.9 / 5</div>
+            <div class="fcard-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="#trust-bar" class="hero-scroll" aria-label="Rolar para baixo">
+    <span>Explorar</span>
+    <div class="scroll-line" aria-hidden="true"></div>
+  </a>
+</section>
+
+<!-- ── TRUST BAR ── -->
+<section id="trust-bar" aria-label="Diferenciais">
+  <div class="container">
+    <ul class="trust-list" role="list">
+      <li class="trust-item"><i class="fas fa-shield-check" aria-hidden="true"></i> Produtos Certificados</li>
+      <li class="trust-item"><i class="fas fa-truck-fast" aria-hidden="true"></i> Entrega Rápida</li>
+      <li class="trust-item"><i class="fas fa-star" aria-hidden="true"></i> 4.9 de avaliação</li>
+      <li class="trust-item"><i class="fas fa-lock" aria-hidden="true"></i> Pagamento Seguro</li>
+      <li class="trust-item"><i class="fas fa-headset" aria-hidden="true"></i> Suporte Personalizado</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about" aria-label="Sobre a Vick Cosmétics">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-imgs fade-in" aria-hidden="true">
+        <div class="about-img-bg" style="background:linear-gradient(145deg,#F5EDE4,#EEC5CF,#E8A4B4);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:var(--rose-dark);">
+          <i class="fas fa-heart" style="font-size:3rem;opacity:0.4;"></i>
+          <span style="font-family:var(--font-display);font-size:1.1rem;font-style:italic;color:var(--rose-dark);opacity:0.7;">Cuidado &amp; Amor</span>
+        </div>
+        <div class="about-img-fg" style="background:linear-gradient(145deg,#FDF0F3,#F5D6DF);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--rose-deep);">
+          <i class="fas fa-gem" style="font-size:2rem;opacity:0.45;"></i>
+          <span style="font-size:11px;text-align:center;padding:0 12px;color:var(--text-light);font-weight:400;">Produtos originais e de qualidade</span>
+        </div>
+        <div class="about-accent" aria-hidden="true">
+          <i class="fas fa-leaf"></i>
+        </div>
+      </div>
+      <div class="about-content fade-in">
+        <p class="section-label">Nossa história</p>
+        <h2 class="section-title">Beleza com <em>propósito</em></h2>
+        <p>A Vick Cosmétics nasceu do amor pela beleza autêntica. Acreditamos que cada pessoa tem uma essência única que merece ser valorizada com produtos de verdadeira qualidade.</p>
+        <p>Trabalhamos apenas com marcas certificadas e produtos originais, garantindo segurança, eficácia e resultados reais. Nosso atendimento é personalizado: estamos aqui para te ajudar a encontrar o que você precisa.</p>
+        <p>Seja para o cuidado da pele, maquiagem ou fragrâncias, temos a solução ideal para o seu estilo de vida — com a agilidade e confiança que você merece.</p>
+        <div class="about-stats">
+          <div class="stat-item">
+            <div class="stat-num">2.5k+</div>
+            <div class="stat-label">Clientes</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">4.9★</div>
+            <div class="stat-label">Avaliação</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Original</div>
+          </div>
+        </div>
+        <a href="https://wa.me/5500000000000" class="btn btn-rose" target="_blank" rel="noopener" aria-label="Conhecer mais via WhatsApp" style="align-self:flex-start;margin-top:8px;">
+          <i class="fab fa-whatsapp" aria-hidden="true"></i>
+          Conhecer Mais
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRODUCTS ── -->
+<section id="products" aria-label="Produtos em destaque">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">Curadoria especial</p>
+      <h2 class="section-title">Produtos em <em>destaque</em></h2>
+      <p>Selecionados com cuidado para oferecer o melhor em beleza e cuidados pessoais.</p>
+    </div>
+    <div class="products-grid" role="list">
+
+      <!-- Card 1 -->
+      <article class="product-card fade-in" role="listitem">
+        <div class="product-img-wrap">
+          <div class="placeholder-img" style="background:linear-gradient(145deg,#FDF0F3,#F5D6DF);">
+            <i class="fas fa-bottle-droplet" aria-hidden="true"></i>
+            <span>Sérum Facial</span>
+          </div>
+          <span class="product-badge new">Novo</span>
+          <div class="product-actions-hover">
+            <a href="https://wa.me/5500000000000?text=Olá! Tenho interesse no Sérum Facial Vitamina C" class="btn-buy-card" target="_blank" rel="noopener" aria-label="Comprar Sérum Facial">
+              <i class="fas fa-bag-shopping" aria-hidden="true"></i> Comprar
+            </a>
+            <a href="https://wa.me/5500000000000?text=Quero saber mais sobre o Sérum Facial Vitamina C" class="btn-wpp-card" target="_blank" rel="noopener" aria-label="Perguntar sobre Sérum Facial no WhatsApp">
+              <i class="fab fa-whatsapp" aria-hidden="true"></i> WPP
+            </a>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">Skincare</div>
+          <h3 class="product-name">Sérum Facial Vitamina C</h3>
+          <div class="product-price-row">
+            <div>
+              <span class="product-price">R$ 89,90</span>
+              <span class="product-old-price">R$ 119,90</span>
+            </div>
+            <div class="product-stars" aria-label="5 estrelas">★★★★★</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="product-card fade-in" role="listitem">
+        <div class="product-img-wrap">
+          <div class="placeholder-img" style="background:linear-gradient(145deg,#FBF7F4,#E8D5C4);">
+            <i class="fas fa-fill-drip" aria-hidden="true"></i>
+            <span>Base Líquida</span>
+          </div>
+          <span class="product-badge">Destaque</span>
+          <div class="product-actions-hover">
+            <a href="https://wa.me/5500000000000?text=Quero comprar a Base Líquida Cobertura Total" class="btn-buy-card" target="_blank" rel="noopener" aria-label="Comprar Base Líquida">
+              <i class="fas fa-bag-shopping" aria-hidden="true"></i> Comprar
+            </a>
+            <a href="https://wa.me/5500000000000?text=Quero saber mais sobre a Base Líquida" class="btn-wpp-card" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp" aria-hidden="true"></i> WPP
+            </a>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">Maquiagem</div>
+          <h3 class="product-name">Base Líquida Cobertura Total</h3>
+          <div class="product-price-row">
+            <span class="product-price">R$ 64,90</span>
+            <div class="product-stars" aria-label="5 estrelas">★★★★★</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="product-card fade-in" role="listitem">
+        <div class="product-img-wrap">
+          <div class="placeholder-img" style="background:linear-gradient(145deg,#FDF0F3,#EEC5CF);">
+            <i class="fas fa-pump-soap" aria-hidden="true"></i>
+            <span>Perfume Floral</span>
+          </div>
+          <span class="product-badge sale">-20%</span>
+          <div class="product-actions-hover">
+            <a href="https://wa.me/5500000000000?text=Quero comprar o Perfume Floral Rose Intense" class="btn-buy-card" target="_blank" rel="noopener" aria-label="Comprar Perfume Floral">
+              <i class="fas fa-bag-shopping" aria-hidden="true"></i> Comprar
+            </a>
+            <a href="https://wa.me/5500000000000?text=Quero saber mais sobre o Perfume Floral" class="btn-wpp-card" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp" aria-hidden="true"></i> WPP
+            </a>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">Fragrâncias</div>
+          <h3 class="product-name">Perfume Floral Rose Intense</h3>
+          <div class="product-price-row">
+            <div>
+              <span class="product-price">R$ 149,90</span>
+              <span class="product-old-price">R$ 189,90</span>
+            </div>
+            <div class="product-stars" aria-label="5 estrelas">★★★★★</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="product-card fade-in" role="listitem">
+        <div class="product-img-wrap">
+          <div class="placeholder-img" style="background:linear-gradient(145deg,#F5EDE4,#C9A96E,#E8D5A8);opacity:0.9;">
+            <i class="fas fa-sun" aria-hidden="true"></i>
+            <span>Protetor Solar</span>
+          </div>
+          <span class="product-badge new">Novo</span>
+          <div class="product-actions-hover">
+            <a href="https://wa.me/5500000000000?text=Quero comprar o Protetor Solar FPS 60" class="btn-buy-card" target="_blank" rel="noopener" aria-label="Comprar Protetor Solar">
+              <i class="fas fa-bag-shopping" aria-hidden="true"></i> Comprar
+            </a>
+            <a href="https://wa.me/5500000000000?text=Quero saber mais sobre o Protetor Solar FPS 60" class="btn-wpp-card" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp" aria-hidden="true"></i> WPP
+            </a>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">Proteção</div>
+          <h3 class="product-name">Protetor Solar FPS 60 com Cor</h3>
+          <div class="product-price-row">
+            <span class="product-price">R$ 79,90</span>
+            <div class="product-stars" aria-label="5 estrelas">★★★★★</div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+    <div style="text-align:center;margin-top:48px;" class="fade-in">
+      <a href="https://wa.me/5500000000000?text=Olá! Gostaria de ver mais produtos" class="btn btn-rose" target="_blank" rel="noopener" aria-label="Ver todos os produtos pelo WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+        Ver Todos os Produtos
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── BENEFITS ── -->
+<section id="benefits" aria-label="Nossos diferenciais">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">Por que escolher</p>
+      <h2 class="section-title">Nossos <em>diferenciais</em></h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card fade-in">
+        <div class="benefit-icon" aria-hidden="true"><i class="fas fa-shield-check"></i></div>
+        <h3 class="benefit-title">Produtos Originais</h3>
+        <p class="benefit-desc">Trabalhamos apenas com marcas certificadas e produtos 100% originais, garantindo segurança e eficácia para sua pele.</p>
+      </div>
+      <div class="benefit-card fade-in">
+        <div class="benefit-icon" aria-hidden="true"><i class="fas fa-truck-fast"></i></div>
+        <h3 class="benefit-title">Entrega Rápida</h3>
+        <p class="benefit-desc">Enviamos com agilidade para todo o Brasil. Seu pedido chega embalado com cuidado e no menor tempo possível.</p>
+      </div>
+      <div class="benefit-card fade-in">
+        <div class="benefit-icon" aria-hidden="true"><i class="fas fa-heart-pulse"></i></div>
+        <h3 class="benefit-title">Atendimento Personalizado</h3>
+        <p class="benefit-desc">Nossa equipe está pronta para te ajudar a encontrar os melhores produtos para o seu tipo de pele e necessidades.</p>
+      </div>
+      <div class="benefit-card fade-in">
+        <div class="benefit-icon" aria-hidden="true"><i class="fas fa-lock"></i></div>
+        <h3 class="benefit-title">Pagamento Seguro</h3>
+        <p class="benefit-desc">Diversas formas de pagamento com total segurança. PIX, cartão de crédito, débito e boleto disponíveis.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section id="testimonials" aria-label="Depoimentos de clientes">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">Quem já comprou</p>
+      <h2 class="section-title">O que <em>dizem</em> nossas clientes</h2>
+      <p>Mais de 2.500 clientes satisfeitas — veja o que elas têm a dizer.</p>
+    </div>
+    <div class="testimonials-grid">
+
+      <article class="testimonial-card fade-in">
+        <div class="t-stars" aria-label="5 estrelas">★★★★★</div>
+        <p class="t-text">"Amei tudo! Os produtos chegaram super rápido e bem embalados. O sérum de vitamina C transformou minha pele. Já fiz meu segundo pedido!"</p>
+        <div class="t-author">
+          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--rose-light),var(--rose-deep));border:3px solid var(--rose-light);display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:600;font-size:15px;" aria-hidden="true">A</div>
+          <div>
+            <div class="t-name">Ana Carolina</div>
+            <div class="t-desc">Cliente há 8 meses</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="testimonial-card fade-in">
+        <div class="t-stars" aria-label="5 estrelas">★★★★★</div>
+        <p class="t-text">"Atendimento incrível! A Vick me ajudou a escolher a base certa para meu tom de pele. A qualidade dos produtos é exatamente o que eu precisava."</p>
+        <div class="t-author">
+          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--nude),var(--gold));border:3px solid var(--rose-light);display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:600;font-size:15px;" aria-hidden="true">J</div>
+          <div>
+            <div class="t-name">Juliana Ferreira</div>
+            <div class="t-desc">Cliente há 1 ano</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="testimonial-card fade-in">
+        <div class="t-stars" aria-label="5 estrelas">★★★★★</div>
+        <p class="t-text">"Compro sempre aqui! Produtos originais, preços ótimos e a entrega é super rápida. Indico para todas as minhas amigas sem hesitar."</p>
+        <div class="t-author">
+          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#EEC5CF,var(--rose-deep));border:3px solid var(--rose-light);display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:600;font-size:15px;" aria-hidden="true">M</div>
+          <div>
+            <div class="t-name">Marina Oliveira</div>
+            <div class="t-desc">Cliente fiel</div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section id="cta" aria-label="Chamada para ação">
+  <div class="container">
+    <div class="cta-inner fade-in">
+      <div class="cta-tag"><i class="fab fa-whatsapp" aria-hidden="true"></i> Atendimento agora</div>
+      <h2 class="cta-title">Pronta para <em>realçar<br>sua beleza?</em></h2>
+      <p class="cta-sub">Fale com a gente pelo WhatsApp e receba uma consultoria personalizada. Estamos aqui para te ajudar a encontrar os produtos perfeitos para você.</p>
+      <div class="cta-actions">
+        <a href="https://wa.me/5500000000000?text=Olá! Gostaria de uma consultoria de beleza" class="btn btn-cta-wpp" target="_blank" rel="noopener" aria-label="Iniciar consultoria pelo WhatsApp">
+          <i class="fab fa-whatsapp" aria-hidden="true"></i>
+          Peça pelo WhatsApp
+        </a>
+        <a href="#products" class="btn btn-outline-white">
+          <i class="fas fa-sparkles" aria-hidden="true"></i>
+          Ver Produtos
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand fade-in">
+        <a href="#" class="footer-logo" aria-label="Vick Cosmétics">Vick Cosmétics</a>
+        <p class="footer-tagline">Beleza que realça sua essência. Produtos originais, atendimento personalizado e amor em cada detalhe.</p>
+        <div class="footer-social" role="list">
+          <a href="https://wa.me/5500000000000" class="social-btn" aria-label="WhatsApp" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://instagram.com/vickcosmeticos" class="social-btn" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+          <a href="https://facebook.com/vickcosmeticos" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://tiktok.com/@vickcosmeticos" class="social-btn" aria-label="TikTok" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+      <div class="fade-in">
+        <h3 class="footer-col-title">Navegação</h3>
+        <ul class="footer-links" role="list">
+          <li><a href="#about">Sobre a Loja</a></li>
+          <li><a href="#products">Produtos</a></li>
+          <li><a href="#benefits">Benefícios</a></li>
+          <li><a href="#testimonials">Avaliações</a></li>
+        </ul>
+      </div>
+      <div class="fade-in">
+        <h3 class="footer-col-title">Categorias</h3>
+        <ul class="footer-links" role="list">
+          <li><a href="#products">Skincare</a></li>
+          <li><a href="#products">Maquiagem</a></li>
+          <li><a href="#products">Fragrâncias</a></li>
+          <li><a href="#products">Proteção Solar</a></li>
+        </ul>
+      </div>
+      <div class="fade-in">
+        <h3 class="footer-col-title">Contato</h3>
+        <div class="footer-contact-item">
+          <i class="fab fa-whatsapp" aria-hidden="true"></i>
+          <div><a href="https://wa.me/5500000000000" style="color:var(--gray-400);text-decoration:none;">(00) 00000-0000</a></div>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fab fa-instagram" aria-hidden="true"></i>
+          <div><a href="https://instagram.com/vickcosmeticos" style="color:var(--gray-400);text-decoration:none;" target="_blank" rel="noopener">@vickcosmeticos</a></div>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-map-pin" aria-hidden="true"></i>
+          <div>Sua cidade, Estado</div>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-clock" aria-hidden="true"></i>
+          <div>Seg–Sáb: 9h às 19h</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Vick Cosmétics — Todos os direitos reservados.</span>
+      <span>Feito com <i class="fas fa-heart" style="color:var(--rose-deep);" aria-label="amor"></i> para você</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ── FLOATING WPP ── -->
+<a href="https://wa.me/5500000000000?text=Olá! Vim pelo site e gostaria de mais informações" id="wpp-float" target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
+  <i class="fab fa-whatsapp" aria-hidden="true"></i>
+</a>
+
+<script>
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+    hamburger.querySelectorAll('span')[0].style.transform = isOpen ? 'rotate(45deg) translate(5px, 5px)' : '';
+    hamburger.querySelectorAll('span')[1].style.opacity = isOpen ? '0' : '1';
+    hamburger.querySelectorAll('span')[2].style.transform = isOpen ? 'rotate(-45deg) translate(5px, -5px)' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+    });
+  });
+
+  // Fade-in on scroll (IntersectionObserver)
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => { entry.target.classList.add('visible'); }, i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Stagger cards in grids
+  document.querySelectorAll('.products-grid .fade-in, .benefits-grid .fade-in, .testimonials-grid .fade-in').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 90}ms`;
+  });
+</script>
+</body>
+</html>
