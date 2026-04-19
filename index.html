@@ -696,17 +696,24 @@
     .product-img-wrap {
       position: relative;
       overflow: hidden;
-      aspect-ratio: 3/3.4;
+      aspect-ratio: 1 / 1;
       background: var(--nude-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
     }
 
     .product-img-wrap img {
       width: 100%;
+      height: 100%;
+      object-fit: contain;
       transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 0;
     }
 
     .product-card:hover .product-img-wrap img {
-      transform: scale(1.08);
+      transform: scale(1.1);
     }
 
     .product-badge {
@@ -1324,54 +1331,279 @@
       }
     }
 
-    /* ─── PRODUCT PLACEHOLDER IMAGES ─── */
+    /* ─── CART MODAL ─── */
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(42, 31, 28, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .cart-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      max-width: 400px;
+      height: 100%;
+      background: var(--white);
+      z-index: 1001;
+      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.1);
+      transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-drawer.active {
+      right: 0;
+    }
+
+    .cart-header {
+      padding: 24px;
+      border-bottom: 1px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cart-header h2 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--text-dark);
+    }
+
+    .close-cart {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      color: var(--text-mid);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .close-cart:hover {
+      color: var(--rose-deep);
+      transform: rotate(90deg);
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .cart-empty-msg {
+      text-align: center;
+      margin-top: 40px;
+      color: var(--text-light);
+      font-weight: 300;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .cart-item-img {
+      width: 70px;
+      height: 70px;
+      border-radius: var(--radius-sm);
+      background: var(--gray-100);
+      object-fit: contain;
+      padding: 5px;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+
+    .cart-item-price {
+      font-size: 14px;
+      color: var(--rose-dark);
+      font-weight: 600;
+    }
+
+    .cart-item-qty {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .qty-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      border: 1px solid var(--gray-200);
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .qty-btn:hover {
+      border-color: var(--rose-deep);
+      color: var(--rose-deep);
+    }
+
+    .remove-item {
+      color: var(--text-light);
+      font-size: 12px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin-left: auto;
+      transition: var(--transition);
+    }
+
+    .remove-item:hover {
+      color: #ff4d4d;
+    }
+
+    .cart-footer {
+      padding: 24px;
+      border-top: 1px solid var(--gray-200);
+      background: var(--gray-100);
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .cart-total span:last-child {
+      color: var(--rose-dark);
+      font-size: 1.3rem;
+    }
+
+    .btn-checkout {
+      width: 100%;
+      background: var(--rose-deep);
+      color: var(--white);
+      padding: 16px;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn-checkout:hover {
+      background: var(--rose-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .btn-checkout i {
+      font-size: 1.1rem;
+    }
+
+    /* ─── NAV CART ICON ─── */
+    .nav-cart {
+      position: relative;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-left: 20px;
+    }
+
+    #navbar.scrolled .nav-cart {
+      color: var(--text-dark);
+    }
+
+    .nav-cart:hover {
+      color: var(--rose-deep);
+      transform: translateY(-2px);
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background: var(--rose-deep);
+      color: var(--white);
+      font-size: 10px;
+      font-weight: 700;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--rose-deep);
+      transition: var(--transition);
+    }
+
+    #navbar.scrolled .cart-count {
+      border-color: var(--white);
+    }
+
+    @media (max-width: 768px) {
+      .nav-cart {
+        margin-left: auto;
+        margin-right: 15px;
+      }
+    }
+
+    /* ─── PRODUCT PLACEHOLDER WRAPPER ─── */
     .placeholder-img {
       width: 100%;
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
-      gap: 10px;
-      color: var(--rose-deep);
-      font-size: 13px;
-      font-weight: 400;
+      position: relative;
     }
 
     .placeholder-img i {
-      font-size: 2.5rem;
-      opacity: 0.5;
-    }
-
-    .img-1 {
-      height: 85%;
-      object-fit: contain;
-    }
-
-    /* ─── ABOUT PLACEHOLDER ─── */
-    .about-img-placeholder {
-      width: 100%;
-      height: 100%;
-      background: var(--nude-pale);
-      border-radius: var(--radius-lg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 12px;
-      color: var(--rose-deep);
-      text-align: center;
-      padding: 24px;
-    }
-
-    .about-img-placeholder i {
       font-size: 3rem;
-      opacity: 0.4;
-    }
-
-    .about-img-placeholder span {
-      font-size: 12px;
-      color: var(--text-light);
+      color: var(--rose-deep);
+      opacity: 0.2;
+      position: absolute;
+      z-index: 0;
     }
   </style>
 </head>
@@ -1392,6 +1624,10 @@
             <li><a href="https://wa.me/5500000000000" class="nav-cta" aria-label="Falar via WhatsApp"><i
                   class="fab fa-whatsapp"></i> WhatsApp</a></li>
           </ul>
+          <button class="nav-cart" id="cart-btn" aria-label="Ver carrinho">
+            <i class="fas fa-shopping-bag"></i>
+            <span class="cart-count">0</span>
+          </button>
           <button class="hamburger" aria-label="Abrir menu" aria-expanded="false" id="hamburger-btn">
             <span></span><span></span><span></span>
           </button>
@@ -1546,18 +1782,20 @@
       <div class="products-grid" role="list">
 
         <!-- Card 1 -->
-        <article class="product-card fade-in" role="listitem">
+        <article class="product-card fade-in" role="listitem" 
+          data-id="1" 
+          data-name="Sérum Facial Vitamina C" 
+          data-price="89.90" 
+          data-img="./first-removebg-preview.png">
           <div class="product-img-wrap">
             <div class="placeholder-img" style="background:linear-gradient(145deg,#FDF0F3,#F5D6DF);">
-              <img class="img-1" src="./first-removebg-preview.png" alt="">
-              <span>Sérum Facial</span>
+              <img src="./first-removebg-preview.png" alt="Sérum Facial Vitamina C">
             </div>
             <span class="product-badge new">Novo</span>
             <div class="product-actions-hover">
-              <a href="https://wa.me/5500000000000?text=Olá! Tenho interesse no Sérum Facial Vitamina C"
-                class="btn-buy-card" target="_blank" rel="noopener" aria-label="Comprar Sérum Facial">
+              <button class="btn-buy-card add-to-cart" aria-label="Adicionar Sérum Facial ao carrinho">
                 <i class="fas fa-bag-shopping" aria-hidden="true"></i> Comprar
-              </a>
+              </button>
               <a href="https://wa.me/5500000000000?text=Quero saber mais sobre o Sérum Facial Vitamina C"
                 class="btn-wpp-card" target="_blank" rel="noopener"
                 aria-label="Perguntar sobre Sérum Facial no WhatsApp">
@@ -1579,18 +1817,20 @@
         </article>
 
         <!-- Card 2 -->
-        <article class="product-card fade-in" role="listitem">
+        <article class="product-card fade-in" role="listitem"
+          data-id="2" 
+          data-name="Base Líquida Cobertura Total" 
+          data-price="64.90" 
+          data-img="./second-removebg-preview.png">
           <div class="product-img-wrap">
             <div class="placeholder-img" style="background:linear-gradient(145deg,#FBF7F4,#E8D5C4);">
-              <img class="img-2" src="./second-removebg-preview.png" alt="">
-              <span>Base Líquida</span>
+              <img src="./second-removebg-preview.png" alt="Base Líquida Cobertura Total">
             </div>
             <span class="product-badge">Destaque</span>
             <div class="product-actions-hover">
-              <a href="https://wa.me/5500000000000?text=Quero comprar a Base Líquida Cobertura Total"
-                class="btn-buy-card" target="_blank" rel="noopener" aria-label="Comprar Base Líquida">
+              <button class="btn-buy-card add-to-cart" aria-label="Adicionar Base Líquida ao carrinho">
                 <i class="fas fa-bag-shopping" aria-hidden="true"></i> Comprar
-              </a>
+              </button>
               <a href="https://wa.me/5500000000000?text=Quero saber mais sobre a Base Líquida" class="btn-wpp-card"
                 target="_blank" rel="noopener">
                 <i class="fab fa-whatsapp" aria-hidden="true"></i> WPP
@@ -1608,18 +1848,20 @@
         </article>
 
         <!-- Card 3 -->
-        <article class="product-card fade-in" role="listitem">
+        <article class="product-card fade-in" role="listitem"
+          data-id="3" 
+          data-name="Perfume Floral Rose Intense" 
+          data-price="149.90" 
+          data-img="./three-removebg-preview.png">
           <div class="product-img-wrap">
             <div class="placeholder-img" style="background:linear-gradient(145deg,#FDF0F3,#EEC5CF);">
-              <img class="img-3" src="./three-removebg-preview.png" alt="">
-              <span>Perfume Floral</span>
+              <img src="./three-removebg-preview.png" alt="Perfume Floral Rose Intense">
             </div>
             <span class="product-badge sale">-20%</span>
             <div class="product-actions-hover">
-              <a href="https://wa.me/5500000000000?text=Quero comprar o Perfume Floral Rose Intense"
-                class="btn-buy-card" target="_blank" rel="noopener" aria-label="Comprar Perfume Floral">
+              <button class="btn-buy-card add-to-cart" aria-label="Adicionar Perfume Floral ao carrinho">
                 <i class="fas fa-bag-shopping" aria-hidden="true"></i> Comprar
-              </a>
+              </button>
               <a href="https://wa.me/5500000000000?text=Quero saber mais sobre o Perfume Floral" class="btn-wpp-card"
                 target="_blank" rel="noopener">
                 <i class="fab fa-whatsapp" aria-hidden="true"></i> WPP
@@ -1640,19 +1882,21 @@
         </article>
 
         <!-- Card 4 -->
-        <article class="product-card fade-in" role="listitem">
+        <article class="product-card fade-in" role="listitem"
+          data-id="4" 
+          data-name="Protetor Solar FPS 60" 
+          data-price="79.90" 
+          data-img="./fourt-removebg-preview.png">
           <div class="product-img-wrap">
             <div class="placeholder-img"
               style="background:linear-gradient(145deg,#F5EDE4,#C9A96E,#E8D5A8);opacity:0.9;">
-              <img class="img-4" src="./fourt-removebg-preview.png" alt="">
-              <span>Protetor Solar</span>
+              <img src="./fourt-removebg-preview.png" alt="Protetor Solar FPS 60">
             </div>
             <span class="product-badge new">Novo</span>
             <div class="product-actions-hover">
-              <a href="https://wa.me/5500000000000?text=Quero comprar o Protetor Solar FPS 60" class="btn-buy-card"
-                target="_blank" rel="noopener" aria-label="Comprar Protetor Solar">
+              <button class="btn-buy-card add-to-cart" aria-label="Adicionar Protetor Solar ao carrinho">
                 <i class="fas fa-bag-shopping" aria-hidden="true"></i> Comprar
-              </a>
+              </button>
               <a href="https://wa.me/5500000000000?text=Quero saber mais sobre o Protetor Solar FPS 60"
                 class="btn-wpp-card" target="_blank" rel="noopener">
                 <i class="fab fa-whatsapp" aria-hidden="true"></i> WPP
@@ -1864,13 +2108,203 @@
     </div>
   </footer>
 
-  <!-- ── FLOATING WPP ── -->
   <a href="https://wa.me/5500000000000?text=Olá! Vim pelo site e gostaria de mais informações" id="wpp-float"
     target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
     <i class="fab fa-whatsapp" aria-hidden="true"></i>
   </a>
 
+  <!-- ── CART DRAWER ── -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <h2>Meu Carrinho</h2>
+      <button class="close-cart" id="close-cart"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-items" id="cart-items-container">
+      <p class="cart-empty-msg">Seu carrinho está vazio</p>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cart-total-value">R$ 0,00</span>
+      </div>
+      <button class="btn-checkout" id="generate-order">
+        <i class="fab fa-whatsapp"></i> Generar Orden
+      </button>
+    </div>
+  </div>
+
   <script>
+    // ─── CART LOGIC ───
+    let cart = JSON.parse(localStorage.getItem('vick_cart')) || [];
+
+    const cartBtn = document.getElementById('cart-btn');
+    const closeCart = document.getElementById('close-cart');
+    const cartDrawer = document.getElementById('cart-drawer');
+    const cartOverlay = document.getElementById('cart-overlay');
+    const cartItemsContainer = document.getElementById('cart-items-container');
+    const cartCountBadge = document.querySelector('.cart-count');
+    const cartTotalValue = document.getElementById('cart-total-value');
+    const generateOrderBtn = document.getElementById('generate-order');
+
+    function toggleCart() {
+      cartDrawer.classList.toggle('active');
+      cartOverlay.classList.toggle('active');
+      document.body.style.overflow = cartDrawer.classList.contains('active') ? 'hidden' : '';
+    }
+
+    cartBtn.addEventListener('click', toggleCart);
+    closeCart.addEventListener('click', toggleCart);
+    cartOverlay.addEventListener('click', toggleCart);
+
+    function updateCart() {
+      localStorage.setItem('vick_cart', JSON.stringify(cart));
+      updateCartCount();
+      renderCart();
+    }
+
+    function updateCartCount() {
+      const count = cart.reduce((sum, item) => sum + item.qty, 0);
+      cartCountBadge.textContent = count;
+    }
+
+    function renderCart() {
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p class="cart-empty-msg">Seu carrinho está vazio</p>';
+        cartTotalValue.textContent = 'R$ 0,00';
+        return;
+      }
+
+      // Check if we can do a targeted update
+      const existingRows = cartItemsContainer.querySelectorAll('.cart-item');
+      if (existingRows.length === cart.length && !cartItemsContainer.querySelector('.cart-empty-msg')) {
+        let total = 0;
+        cart.forEach((item, index) => {
+          total += item.price * item.qty;
+          const row = existingRows[index];
+          // Only update if quantity changed
+          const qtyDisplay = row.querySelector('.qty-display');
+          if (qtyDisplay.textContent != item.qty) {
+             qtyDisplay.textContent = item.qty;
+          }
+        });
+        cartTotalValue.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+        return;
+      }
+
+      // Full render if number of products changed
+      cartItemsContainer.innerHTML = '';
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        total += item.price * item.qty;
+        const itemEl = document.createElement('div');
+        itemEl.className = 'cart-item';
+        itemEl.innerHTML = `
+          <img src="${item.img}" alt="${item.name}" class="cart-item-img">
+          <div class="cart-item-info">
+            <h4 class="cart-item-title">${item.name}</h4>
+            <div class="cart-item-price">R$ ${item.price.toFixed(2).replace('.', ',')}</div>
+            <div class="cart-item-qty">
+              <button class="qty-btn minus" data-index="${index}">-</button>
+              <span class="qty-display">${item.qty}</span>
+              <button class="qty-btn plus" data-index="${index}">+</button>
+            </div>
+          </div>
+          <button class="remove-item" data-index="${index}"><i class="fas fa-trash-can"></i></button>
+        `;
+        cartItemsContainer.appendChild(itemEl);
+      });
+
+      cartTotalValue.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+
+      // Re-attach listeners after full render
+      attachCartListeners();
+    }
+
+    function attachCartListeners() {
+      document.querySelectorAll('.qty-btn.plus').forEach(btn => {
+        btn.onclick = (e) => {
+          const index = e.target.closest('button').dataset.index;
+          cart[index].qty++;
+          updateCart();
+        };
+      });
+
+      document.querySelectorAll('.qty-btn.minus').forEach(btn => {
+        btn.onclick = (e) => {
+          const index = e.target.closest('button').dataset.index;
+          if (cart[index].qty > 1) {
+            cart[index].qty--;
+            updateCart();
+          } else {
+            cart.splice(index, 1);
+            updateCart();
+          }
+        };
+      });
+
+      document.querySelectorAll('.remove-item').forEach(btn => {
+        btn.onclick = (e) => {
+          const index = e.currentTarget.dataset.index;
+          cart.splice(index, 1);
+          updateCart();
+        };
+      });
+    }
+
+    function addToCart(product) {
+      const existingItem = cart.find(item => item.id === product.id);
+      if (existingItem) {
+        existingItem.qty++;
+      } else {
+        cart.push({ ...product, qty: 1 });
+      }
+      updateCart();
+      if (!cartDrawer.classList.contains('active')) {
+        toggleCart();
+      }
+    }
+
+    document.querySelectorAll('.add-to-cart').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.product-card');
+        const product = {
+          id: card.dataset.id,
+          name: card.dataset.name,
+          price: parseFloat(card.dataset.price),
+          img: card.dataset.img
+        };
+        addToCart(product);
+      });
+    });
+
+    generateOrderBtn.addEventListener('click', () => {
+      if (cart.length === 0) return;
+
+      let message = "Olá! Gostaria de fazer um pedido:\n\n";
+      let total = 0;
+
+      cart.forEach(item => {
+        const subtotal = item.price * item.qty;
+        total += subtotal;
+        message += `• ${item.qty}x ${item.name} - R$ ${subtotal.toFixed(2)}\n`;
+      });
+
+      message += `\nTotal do Pedido: R$ ${total.toFixed(2)}`;
+      message += "\n\nPor favor, me informe o link para pagamento e prazo de entrega.";
+
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappUrl = `https://wa.me/5500000000000?text=${encodedMessage}`;
+      
+      window.open(whatsappUrl, '_blank');
+    });
+
+    // Initialize
+    renderCart();
+    updateCartCount();
+
+    // ─── EXISTING UI LOGIC ───
     // Navbar scroll
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
