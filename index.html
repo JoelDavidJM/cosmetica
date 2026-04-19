@@ -257,6 +257,42 @@
       background: var(--rose-pale);
     }
 
+    .img-elegancia {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      transition: transform 0.8s ease;
+    }
+
+    .hero-img-frame:hover .img-elegancia {
+      transform: scale(1.05);
+    }
+
+    .hero-img-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      width: 100%;
+      height: 100%;
+      color: var(--white);
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(139, 61, 80, 0.4));
+    }
+
+    .hero-img-content i,
+    .hero-img-content span {
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      z-index: 2;
+      color: rosybrown;
+    }
+
     /* ─── HERO ─── */
     #hero {
       min-height: 100svh;
@@ -450,11 +486,13 @@
     .hero-floating-card.card-1 {
       bottom: 32px;
       left: -28px;
+      z-index: 2;
     }
 
     .hero-floating-card.card-2 {
       top: 40px;
       right: -28px;
+      z-index: 2;
     }
 
     .fcard-label {
@@ -1426,8 +1464,15 @@
     }
 
     @keyframes slideIn {
-      from { opacity: 0; transform: translateX(20px); }
-      to { opacity: 1; transform: translateX(0); }
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
     .cart-item-img {
@@ -1589,6 +1634,137 @@
       border-color: var(--white);
     }
 
+    /* ─── APPOINTMENTS SECTION ─── */
+    #appointments {
+      padding: 100px 0;
+      background: var(--off-white);
+    }
+
+    .appointments-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .appointments-info {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .contact-item-box {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .contact-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--rose-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--rose-deep);
+    }
+
+    .contact-text-wrap h4 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-light);
+      margin-bottom: 2px;
+    }
+
+    .contact-text-wrap p {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    .appointments-form-side {
+      background: var(--white);
+      padding: 40px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--gray-200);
+    }
+
+    .form-title {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      color: var(--text-dark);
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-mid);
+      margin-bottom: 8px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1.5px solid var(--gray-200);
+      font-family: var(--font-body);
+      font-size: 14px;
+      transition: var(--transition);
+      background: var(--white);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--rose-deep);
+      box-shadow: 0 0 0 4px rgba(232, 164, 180, 0.1);
+    }
+
+    .btn-form-wpp {
+      width: 100%;
+      background: #25D366;
+      color: var(--white);
+      padding: 16px;
+      border-radius: 50px;
+      border: none;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: var(--transition);
+      margin-top: 10px;
+    }
+
+    .btn-form-wpp:hover {
+      background: #1da851;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
+    }
+
+    @media (max-width: 991px) {
+      .appointments-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .appointments-form-side {
+        padding: 30px;
+      }
+    }
+
     @media (max-width: 768px) {
       .nav-cart {
         margin-left: auto;
@@ -1628,9 +1804,10 @@
             <li><a href="#">Inicio</a></li>
             <li><a href="#about">Sobre</a></li>
             <li><a href="#products">Produtos</a></li>
+            <li><a href="#appointments">Citas</a></li>
             <li><a href="#benefits">Benefícios</a></li>
             <li><a href="#testimonials">Avaliações</a></li>
-            <li><a href="https://wa.me/5500000000000" class="nav-cta" aria-label="Falar via WhatsApp"><i
+            <li><a href="https://wa.me/593987595039" class="nav-cta" aria-label="Falar via WhatsApp"><i
                   class="fab fa-whatsapp"></i> WhatsApp</a></li>
           </ul>
           <button class="nav-cart" id="cart-btn" aria-label="Ver carrinho">
@@ -1646,9 +1823,10 @@
         <a href="#">Inicio</a>
         <a href="#about">Sobre a Loja</a>
         <a href="#products">Produtos</a>
+        <a href="#appointments">Agendar Cita</a>
         <a href="#benefits">Benefícios</a>
         <a href="#testimonials">Avaliações</a>
-        <a href="https://wa.me/5500000000000"><i class="fab fa-whatsapp"></i> &nbsp;Falar pelo WhatsApp</a>
+        <a href="https://wa.me/593987595039"><i class="fab fa-whatsapp"></i> &nbsp;Falar pelo WhatsApp</a>
       </div>
     </nav>
   </header>
@@ -1675,7 +1853,7 @@
               <i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i>
               Ver Produtos
             </a>
-            <a href="https://wa.me/5500000000000" class="btn btn-whatsapp" target="_blank" rel="noopener"
+            <a href="https://wa.me/593987595039" class="btn btn-whatsapp" target="_blank" rel="noopener"
               aria-label="Falar agora pelo WhatsApp">
               <i class="fab fa-whatsapp" aria-hidden="true"></i>
               Falar Agora
@@ -1684,12 +1862,13 @@
         </div>
         <div class="hero-visual" aria-hidden="true">
           <div class="hero-img-frame">
-            <div
-              style="width:100%;height:100%;background:linear-gradient(145deg,#F5D6DF,#E8A4B4,#C97A91);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;color:rgba(255,255,255,0.8);">
-              <i class="fas fa-spa" style="font-size:4rem;opacity:0.7;"></i>
+            <div class="hero-img-content" style="border-radius:var(--radius-lg); overflow:hidden;">
+              <i class="fas fa-spa" style="font-size:4rem; opacity:0.9;"></i>
               <span
-                style="font-family:var(--font-display);font-size:1.3rem;font-style:italic;text-align:center;padding:0 24px;">Beleza
-                &amp; Elegância</span>
+                style="font-family:var(--font-display); font-size:1.5rem; font-style:italic; text-align:center; padding:0 24px;">
+                Beleza &amp; Elegância
+              </span>
+              <img class="img-elegancia" src="./elegancia.jpg" alt="Elegancia Vick Cosmétics">
             </div>
             <div class="hero-floating-card card-1">
               <div class="fcard-label">Clientes felizes</div>
@@ -1771,7 +1950,7 @@
               <div class="stat-label">Original</div>
             </div>
           </div>
-          <a href="https://wa.me/5500000000000" class="btn btn-rose" target="_blank" rel="noopener"
+          <a href="https://wa.me/593987595039" class="btn btn-rose" target="_blank" rel="noopener"
             aria-label="Conhecer mais via WhatsApp" style="align-self:flex-start;margin-top:8px;">
             <i class="fab fa-whatsapp" aria-hidden="true"></i>
             Conhecer Mais
@@ -1792,11 +1971,8 @@
       <div class="products-grid" role="list">
 
         <!-- Card 1 -->
-        <article class="product-card fade-in" role="listitem" 
-          data-id="1" 
-          data-name="Sérum Facial Vitamina C" 
-          data-price="89.90" 
-          data-img="./first-removebg-preview.png">
+        <article class="product-card fade-in" role="listitem" data-id="1" data-name="Sérum Facial Vitamina C"
+          data-price="89.90" data-img="./first-removebg-preview.png">
           <div class="product-img-wrap">
             <div class="placeholder-img" style="background:linear-gradient(145deg,#FDF0F3,#F5D6DF);">
               <img src="./first-removebg-preview.png" alt="Sérum Facial Vitamina C">
@@ -1806,7 +1982,7 @@
               <button class="btn-buy-card add-to-cart" aria-label="Adicionar Sérum Facial ao carrinho">
                 <i class="fas fa-bag-shopping" aria-hidden="true"></i> Comprar
               </button>
-              <a href="https://wa.me/5500000000000?text=Quero saber mais sobre o Sérum Facial Vitamina C"
+              <a href="https://wa.me/593987595039?text=Quero saber mais sobre o Sérum Facial Vitamina C"
                 class="btn-wpp-card" target="_blank" rel="noopener"
                 aria-label="Perguntar sobre Sérum Facial no WhatsApp">
                 <i class="fab fa-whatsapp" aria-hidden="true"></i> WPP
@@ -1827,11 +2003,8 @@
         </article>
 
         <!-- Card 2 -->
-        <article class="product-card fade-in" role="listitem"
-          data-id="2" 
-          data-name="Base Líquida Cobertura Total" 
-          data-price="64.90" 
-          data-img="./second-removebg-preview.png">
+        <article class="product-card fade-in" role="listitem" data-id="2" data-name="Base Líquida Cobertura Total"
+          data-price="64.90" data-img="./second-removebg-preview.png">
           <div class="product-img-wrap">
             <div class="placeholder-img" style="background:linear-gradient(145deg,#FBF7F4,#E8D5C4);">
               <img src="./second-removebg-preview.png" alt="Base Líquida Cobertura Total">
@@ -1841,7 +2014,7 @@
               <button class="btn-buy-card add-to-cart" aria-label="Adicionar Base Líquida ao carrinho">
                 <i class="fas fa-bag-shopping" aria-hidden="true"></i> Comprar
               </button>
-              <a href="https://wa.me/5500000000000?text=Quero saber mais sobre a Base Líquida" class="btn-wpp-card"
+              <a href="https://wa.me/593987595039?text=Quero saber mais sobre a Base Líquida" class="btn-wpp-card"
                 target="_blank" rel="noopener">
                 <i class="fab fa-whatsapp" aria-hidden="true"></i> WPP
               </a>
@@ -1858,11 +2031,8 @@
         </article>
 
         <!-- Card 3 -->
-        <article class="product-card fade-in" role="listitem"
-          data-id="3" 
-          data-name="Perfume Floral Rose Intense" 
-          data-price="149.90" 
-          data-img="./three-removebg-preview.png">
+        <article class="product-card fade-in" role="listitem" data-id="3" data-name="Perfume Floral Rose Intense"
+          data-price="149.90" data-img="./three-removebg-preview.png">
           <div class="product-img-wrap">
             <div class="placeholder-img" style="background:linear-gradient(145deg,#FDF0F3,#EEC5CF);">
               <img src="./three-removebg-preview.png" alt="Perfume Floral Rose Intense">
@@ -1872,7 +2042,7 @@
               <button class="btn-buy-card add-to-cart" aria-label="Adicionar Perfume Floral ao carrinho">
                 <i class="fas fa-bag-shopping" aria-hidden="true"></i> Comprar
               </button>
-              <a href="https://wa.me/5500000000000?text=Quero saber mais sobre o Perfume Floral" class="btn-wpp-card"
+              <a href="https://wa.me/593987595039?text=Quero saber mais sobre o Perfume Floral" class="btn-wpp-card"
                 target="_blank" rel="noopener">
                 <i class="fab fa-whatsapp" aria-hidden="true"></i> WPP
               </a>
@@ -1892,11 +2062,8 @@
         </article>
 
         <!-- Card 4 -->
-        <article class="product-card fade-in" role="listitem"
-          data-id="4" 
-          data-name="Protetor Solar FPS 60" 
-          data-price="79.90" 
-          data-img="./fourt-removebg-preview.png">
+        <article class="product-card fade-in" role="listitem" data-id="4" data-name="Protetor Solar FPS 60"
+          data-price="79.90" data-img="./fourt-removebg-preview.png">
           <div class="product-img-wrap">
             <div class="placeholder-img"
               style="background:linear-gradient(145deg,#F5EDE4,#C9A96E,#E8D5A8);opacity:0.9;">
@@ -1907,7 +2074,7 @@
               <button class="btn-buy-card add-to-cart" aria-label="Adicionar Protetor Solar ao carrinho">
                 <i class="fas fa-bag-shopping" aria-hidden="true"></i> Comprar
               </button>
-              <a href="https://wa.me/5500000000000?text=Quero saber mais sobre o Protetor Solar FPS 60"
+              <a href="https://wa.me/593987595039?text=Quero saber mais sobre o Protetor Solar FPS 60"
                 class="btn-wpp-card" target="_blank" rel="noopener">
                 <i class="fab fa-whatsapp" aria-hidden="true"></i> WPP
               </a>
@@ -1925,7 +2092,7 @@
 
       </div>
       <div style="text-align:center;margin-top:48px;" class="fade-in">
-        <a href="https://wa.me/5500000000000?text=Olá! Gostaria de ver mais produtos" class="btn btn-rose"
+        <a href="https://wa.me/593987595039?text=Olá! Gostaria de ver mais produtos" class="btn btn-rose"
           target="_blank" rel="noopener" aria-label="Ver todos os produtos pelo WhatsApp">
           <i class="fab fa-whatsapp" aria-hidden="true"></i>
           Ver Todos os Produtos
@@ -1933,6 +2100,87 @@
       </div>
     </div>
   </section>
+
+  <!-- ── APPOINTMENTS ── -->
+  <section id="appointments" aria-label="Agende sua cita">
+    <div class="container">
+      <div class="appointments-grid">
+        <div class="appointments-info fade-in">
+          <p class="section-label">Contactanos</p>
+          <h2 class="section-title">Agenda tu <em>cita hoy</em></h2>
+          <p>Estamos listas para atenderte. Escríbenos por WhatsApp o llena el formulario y te contactamos pronto.</p>
+
+          <div class="contact-list" style="margin-top:20px;display:flex;flex-direction:column;gap:20px;">
+            <div class="contact-item-box">
+              <div class="contact-icon-wrap"><i class="fas fa-location-dot"></i></div>
+              <div class="contact-text-wrap">
+                <h4>Ubicación</h4>
+                <p>Montecristi, Manabí, Ecuador</p>
+              </div>
+            </div>
+            <div class="contact-item-box">
+              <div class="contact-icon-wrap"><i class="fab fa-whatsapp"></i></div>
+              <div class="contact-text-wrap">
+                <h4>WhatsApp</h4>
+                <p>098 759 5039</p>
+              </div>
+            </div>
+            <div class="contact-item-box">
+              <div class="contact-icon-wrap"><i class="fab fa-instagram"></i></div>
+              <div class="contact-text-wrap">
+                <h4>Instagram</h4>
+                <p>@isacolorsoficial</p>
+              </div>
+            </div>
+            <div class="contact-item-box">
+              <div class="contact-icon-wrap"><i class="fab fa-tiktok"></i></div>
+              <div class="contact-text-wrap">
+                <h4>TikTok</h4>
+                <p>@isacolorss</p>
+              </div>
+            </div>
+          </div>
+
+          <a href="https://wa.me/593987595039" class="btn btn-whatsapp" style="margin-top:20px;align-self:flex-start;">
+            <i class="fab fa-whatsapp"></i> Chatear por WhatsApp
+          </a>
+        </div>
+
+        <div class="appointments-form-side fade-in">
+          <h3 class="form-title">Solicita información</h3>
+          <form id="appointment-form">
+            <div class="form-group">
+              <label for="user-name">Tu nombre</label>
+              <input type="text" id="user-name" class="form-control" placeholder="Ej. María González" required>
+            </div>
+            <div class="form-group">
+              <label for="user-phone">Tu número de WhatsApp</label>
+              <input type="tel" id="user-phone" class="form-control" placeholder="09XXXXXXXX" required>
+            </div>
+            <div class="form-group">
+              <label for="user-service">Servicio de interés</label>
+              <select id="user-service" class="form-control" required>
+                <option value="" disabled selected>Selecciona un servicio...</option>
+                <option value="Consultoría de Beleza">Consultoría de Beleza</option>
+                <option value="Skincare Personalizado">Skincare Personalizado</option>
+                <option value="Maquiagem Profissional">Maquiagem Profissional</option>
+                <option value="Outros Serviços">Outros Serviços</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="user-msg">Mensaje (opcional)</label>
+              <textarea id="user-msg" class="form-control" rows="3"
+                placeholder="Cuéntanos qué buscas o cuándo quieres tu cita..."></textarea>
+            </div>
+            <button type="submit" class="btn-form-wpp">
+              <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
   <!-- ── BENEFITS ── -->
   <section id="benefits" aria-label="Nossos diferenciais">
@@ -2038,7 +2286,7 @@
         <p class="cta-sub">Fale com a gente pelo WhatsApp e receba uma consultoria personalizada. Estamos aqui para te
           ajudar a encontrar os produtos perfeitos para você.</p>
         <div class="cta-actions">
-          <a href="https://wa.me/5500000000000?text=Olá! Gostaria de uma consultoria de beleza" class="btn btn-cta-wpp"
+          <a href="https://wa.me/593987595039?text=Olá! Gostaria de uma consultoria de beleza" class="btn btn-cta-wpp"
             target="_blank" rel="noopener" aria-label="Iniciar consultoria pelo WhatsApp">
             <i class="fab fa-whatsapp" aria-hidden="true"></i>
             Peça pelo WhatsApp
@@ -2061,7 +2309,7 @@
           <p class="footer-tagline">Beleza que realça sua essência. Produtos originais, atendimento personalizado e amor
             em cada detalhe.</p>
           <div class="footer-social" role="list">
-            <a href="https://wa.me/5500000000000" class="social-btn" aria-label="WhatsApp" target="_blank"
+            <a href="https://wa.me/593987595039" class="social-btn" aria-label="WhatsApp" target="_blank"
               rel="noopener"><i class="fab fa-whatsapp"></i></a>
             <a href="https://instagram.com/vickcosmeticos" class="social-btn" aria-label="Instagram" target="_blank"
               rel="noopener"><i class="fab fa-instagram"></i></a>
@@ -2093,7 +2341,7 @@
           <h3 class="footer-col-title">Contato</h3>
           <div class="footer-contact-item">
             <i class="fab fa-whatsapp" aria-hidden="true"></i>
-            <div><a href="https://wa.me/5500000000000" style="color:var(--gray-400);text-decoration:none;">(00)
+            <div><a href="https://wa.me/593987595039" style="color:var(--gray-400);text-decoration:none;">(00)
                 00000-0000</a></div>
           </div>
           <div class="footer-contact-item">
@@ -2118,7 +2366,7 @@
     </div>
   </footer>
 
-  <a href="https://wa.me/5500000000000?text=Olá! Vim pelo site e gostaria de mais informações" id="wpp-float"
+  <a href="https://wa.me/593987595039?text=Olá! Vim pelo site e gostaria de mais informações" id="wpp-float"
     target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
     <i class="fab fa-whatsapp" aria-hidden="true"></i>
   </a>
@@ -2195,7 +2443,7 @@
           // Only update if quantity changed
           const qtyDisplay = row.querySelector('.qty-display');
           if (qtyDisplay.textContent != item.qty) {
-             qtyDisplay.textContent = item.qty;
+            qtyDisplay.textContent = item.qty;
           }
         });
         cartTotalValue.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
@@ -2305,14 +2553,14 @@
       message += "\n\nPor favor, me informe o link para pagamento e prazo de entrega.";
 
       const encodedMessage = encodeURIComponent(message);
-      const whatsappUrl = `https://wa.me/5500000000000?text=${encodedMessage}`;
-      
+      const whatsappUrl = `https://wa.me/593987595039?text=${encodedMessage}`;
+
       window.open(whatsappUrl, '_blank');
 
       // Clear cart after generating order
       cart = [];
       updateCart();
-      
+
       // Close cart drawer after a moment
       setTimeout(() => {
         if (cartDrawer.classList.contains('active')) {
@@ -2366,6 +2614,29 @@
     document.querySelectorAll('.products-grid .fade-in, .benefits-grid .fade-in, .testimonials-grid .fade-in').forEach((el, i) => {
       el.style.transitionDelay = `${i * 90}ms`;
     });
+
+    // Appointment Form Logic
+    const appointmentForm = document.getElementById('appointment-form');
+    if (appointmentForm) {
+      appointmentForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('user-name').value;
+        const phone = document.getElementById('user-phone').value;
+        const service = document.getElementById('user-service').value;
+        const msg = document.getElementById('user-msg').value;
+
+        const message = `Olá! Gostaria de agendar uma cita:\n\n` +
+          `• *Nombre:* ${name}\n` +
+          `• *WhatsApp:* ${phone}\n` +
+          `• *Servicio:* ${service}\n` +
+          `• *Mensaje:* ${msg || 'Sem mensagem'}`;
+
+        // WhatsApp number from the screenshot: 593 98 759 5039
+        const whatsappUrl = `https://wa.me/593987595039?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+        appointmentForm.reset();
+      });
+    }
   </script>
 </body>
 
