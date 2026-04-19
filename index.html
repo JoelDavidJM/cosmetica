@@ -39,6 +39,7 @@
       --gold: #C9A96E;
       --gold-light: #E8D5A8;
       --white: #FFFFFF;
+      --black: black;
       --off-white: #FEFCFB;
       --gray-100: #F8F6F5;
       --gray-200: #EDE8E5;
@@ -153,7 +154,7 @@
 
     .nav-links {
       display: flex;
-      gap: 32px;
+      gap: 20px;
       list-style: none;
     }
 
@@ -1634,6 +1635,24 @@
       border-color: var(--white);
     }
 
+    .lang-select {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: var(--black);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 11px;
+      cursor: pointer;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    #navbar.scrolled .lang-select {
+      color: var(--text-dark);
+      border-color: var(--gray-300);
+      background: var(--white);
+    }
+
     /* ─── APPOINTMENTS SECTION ─── */
     #appointments {
       padding: 100px 0;
@@ -1801,14 +1820,21 @@
         <div class="nav-inner">
           <a href="#" class="nav-logo" aria-label="Vick Cosmétics - Início">Vick Cosmétics</a>
           <ul class="nav-links" role="list">
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#about">Sobre</a></li>
-            <li><a href="#products">Produtos</a></li>
-            <li><a href="#appointments">Citas</a></li>
-            <li><a href="#benefits">Benefícios</a></li>
-            <li><a href="#testimonials">Avaliações</a></li>
+            <li><a href="#" data-i18n="nav_home">Inicio</a></li>
+            <li><a href="#about" data-i18n="nav_about">Sobre</a></li>
+            <li><a href="#products" data-i18n="nav_products">Produtos</a></li>
+            <li><a href="#appointments" data-i18n="nav_appointments">Citas</a></li>
+            <li><a href="#benefits" data-i18n="nav_benefits">Benefícios</a></li>
+            <li><a href="#testimonials" data-i18n="nav_testimonials">Avaliações</a></li>
+            <li>
+              <select id="lang-switcher" class="lang-select" aria-label="Cambiar idioma">
+                <option value="es">ES</option>
+                <option value="en">EN</option>
+                <option value="pt">PT</option>
+              </select>
+            </li>
             <li><a href="https://wa.me/593987595039" class="nav-cta" aria-label="Falar via WhatsApp"><i
-                  class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                  class="fab fa-whatsapp"></i> <span data-i18n="nav_whatsapp">WhatsApp</span></a></li>
           </ul>
           <button class="nav-cart" id="cart-btn" aria-label="Ver carrinho">
             <i class="fas fa-shopping-bag"></i>
@@ -1838,25 +1864,25 @@
         <div class="hero-content">
           <div class="hero-badge">
             <i class="fas fa-star" aria-hidden="true"></i>
-            Produtos 100% Originais
+            <span data-i18n="hero_badge">Produtos 100% Originais</span>
           </div>
           <h1 class="hero-title">
-            <strong>Vick Cosmétics</strong>
-            <em>Beleza que realça<br>sua essência</em>
+            <strong data-i18n="hero_title_1">Vick Cosmétics</strong>
+            <em data-i18n="hero_title_2">Beleza que realça sua essência</em>
           </h1>
-          <p class="hero-sub">
+          <p class="hero-sub" data-i18n="hero_sub">
             Descubra cosméticos originais selecionados para valorizar cada detalhe de você. Qualidade, elegância e
             cuidado em cada produto.
           </p>
           <div class="hero-actions">
             <a href="#products" class="btn btn-primary" aria-label="Ver catálogo de produtos">
               <i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i>
-              Ver Produtos
+              <span data-i18n="hero_btn_products">Ver Produtos</span>
             </a>
             <a href="https://wa.me/593987595039" class="btn btn-whatsapp" target="_blank" rel="noopener"
               aria-label="Falar agora pelo WhatsApp">
               <i class="fab fa-whatsapp" aria-hidden="true"></i>
-              Falar Agora
+              <span data-i18n="hero_btn_chat">Falar Agora</span>
             </a>
           </div>
         </div>
@@ -1865,18 +1891,19 @@
             <div class="hero-img-content" style="border-radius:var(--radius-lg); overflow:hidden;">
               <i class="fas fa-spa" style="font-size:4rem; opacity:0.9;"></i>
               <span
-                style="font-family:var(--font-display); font-size:1.5rem; font-style:italic; text-align:center; padding:0 24px;">
+                style="font-family:var(--font-display); font-size:1.5rem; font-style:italic; text-align:center; padding:0 24px;"
+                data-i18n="hero_img_text">
                 Beleza &amp; Elegância
               </span>
               <img class="img-elegancia" src="./elegancia.jpg" alt="Elegancia Vick Cosmétics">
             </div>
             <div class="hero-floating-card card-1">
-              <div class="fcard-label">Clientes felizes</div>
+              <div class="fcard-label" data-i18n="hero_stat_1_label">Clientes felizes</div>
               <div class="fcard-value">+2.500</div>
               <div class="fcard-stars">★★★★★</div>
             </div>
             <div class="hero-floating-card card-2">
-              <div class="fcard-label">Avaliação média</div>
+              <div class="fcard-label" data-i18n="hero_stat_2_label">Avaliação média</div>
               <div class="fcard-value">4.9 / 5</div>
               <div class="fcard-stars">★★★★★</div>
             </div>
@@ -1894,11 +1921,11 @@
   <section id="trust-bar" aria-label="Diferenciais">
     <div class="container">
       <ul class="trust-list" role="list">
-        <li class="trust-item"><i class="fas fa-shield-halved" aria-hidden="true"></i> Produtos Certificados</li>
-        <li class="trust-item"><i class="fas fa-truck-fast" aria-hidden="true"></i> Entrega Rápida</li>
-        <li class="trust-item"><i class="fas fa-star" aria-hidden="true"></i> 4.9 de avaliação</li>
-        <li class="trust-item"><i class="fas fa-lock" aria-hidden="true"></i> Pagamento Seguro</li>
-        <li class="trust-item"><i class="fas fa-headset" aria-hidden="true"></i> Suporte Personalizado</li>
+        <li class="trust-item"><i class="fas fa-shield-halved" aria-hidden="true"></i> <span data-i18n="trust_cert">Produtos Certificados</span></li>
+        <li class="trust-item"><i class="fas fa-truck-fast" aria-hidden="true"></i> <span data-i18n="trust_delivery">Entrega Rápida</span></li>
+        <li class="trust-item"><i class="fas fa-star" aria-hidden="true"></i> <span data-i18n="trust_rating">4.9 de avaliação</span></li>
+        <li class="trust-item"><i class="fas fa-lock" aria-hidden="true"></i> <span data-i18n="trust_payment">Pagamento Seguro</span></li>
+        <li class="trust-item"><i class="fas fa-headset" aria-hidden="true"></i> <span data-i18n="trust_support">Suporte Personalizado</span></li>
       </ul>
     </div>
   </section>
@@ -1927,15 +1954,16 @@
           </div>
         </div>
         <div class="about-content fade-in">
-          <p class="section-label">Nossa história</p>
-          <h2 class="section-title">Beleza com <em>propósito</em></h2>
-          <p>A Vick Cosmétics nasceu do amor pela beleza autêntica. Acreditamos que cada pessoa tem uma essência única
-            que merece ser valorizada com produtos de verdadeira qualidade.</p>
-          <p>Trabalhamos apenas com marcas certificadas e produtos originais, garantindo segurança, eficácia e
-            resultados reais. Nosso atendimento é personalizado: estamos aqui para te ajudar a encontrar o que você
-            precisa.</p>
-          <p>Seja para o cuidado da pele, maquiagem ou fragrâncias, temos a solução ideal para o seu estilo de vida —
-            com a agilidade e confiança que você merece.</p>
+          <p class="section-label" data-i18n="about_label">Sobre a Vick Cosmétics</p>
+          <h2 class="section-title" data-i18n="about_title">Qualidade e Elegância em cada detalhe</h2>
+          <p class="about-p" data-i18n="about_p1">
+            Fundada com o propósito de realçar a beleza natural, a Vick Cosmétics oferece uma curadoria exclusiva dos
+            melhores produtos do mercado.
+          </p>
+          <p class="about-p" data-i18n="about_p2">
+            Nossa missão é proporcionar uma experiência de cuidado completa, unindo sofisticação, resultados reais e a
+            confiança de marcas originais.
+          </p>
           <div class="about-stats">
             <div class="stat-item">
               <div class="stat-num">2.5k+</div>
@@ -1964,9 +1992,9 @@
   <section id="products" aria-label="Produtos em destaque">
     <div class="container">
       <div class="section-header fade-in">
-        <p class="section-label">Curadoria especial</p>
-        <h2 class="section-title">Produtos em <em>destaque</em></h2>
-        <p>Selecionados com cuidado para oferecer o melhor em beleza e cuidados pessoais.</p>
+        <p class="section-label" data-i18n="nav_products">Produtos</p>
+        <h2 class="section-title" data-i18n="products_title">Produtos em destaque</h2>
+        <p data-i18n="products_sub">Selecionados com cuidado para oferecer o melhor em beleza e cuidados pessoais.</p>
       </div>
       <div class="products-grid" role="list">
 
@@ -2106,9 +2134,9 @@
     <div class="container">
       <div class="appointments-grid">
         <div class="appointments-info fade-in">
-          <p class="section-label">Contactanos</p>
-          <h2 class="section-title">Agenda tu <em>cita hoy</em></h2>
-          <p>Estamos listas para atenderte. Escríbenos por WhatsApp o llena el formulario y te contactamos pronto.</p>
+          <p class="section-label" data-i18n="appointments_label">Contactanos</p>
+          <h2 class="section-title"><span data-i18n="appointments_title">Agenda tu cita hoy</span></h2>
+          <p data-i18n="appointments_p">Estamos listas para atenderte. Escríbenos por WhatsApp o llena el formulario y te contactamos pronto.</p>
 
           <div class="contact-list" style="margin-top:20px;display:flex;flex-direction:column;gap:20px;">
             <div class="contact-item-box">
@@ -2129,14 +2157,14 @@
               <div class="contact-icon-wrap"><i class="fab fa-instagram"></i></div>
               <div class="contact-text-wrap">
                 <h4>Instagram</h4>
-                <p>@isacolorsoficial</p>
+                <p>@vickcosmeticos</p>
               </div>
             </div>
             <div class="contact-item-box">
               <div class="contact-icon-wrap"><i class="fab fa-tiktok"></i></div>
               <div class="contact-text-wrap">
                 <h4>TikTok</h4>
-                <p>@isacolorss</p>
+                <p>@vickcosmeticos</p>
               </div>
             </div>
           </div>
@@ -2147,33 +2175,33 @@
         </div>
 
         <div class="appointments-form-side fade-in">
-          <h3 class="form-title">Solicita información</h3>
+          <h3 class="form-title" data-i18n="form_title">Solicita información</h3>
           <form id="appointment-form">
             <div class="form-group">
-              <label for="user-name">Tu nombre</label>
-              <input type="text" id="user-name" class="form-control" placeholder="Ej. María González" required>
+              <label for="user-name" data-i18n="form_name">Tu nombre</label>
+              <input type="text" id="user-name" class="form-control" placeholder="Ej. María González" required data-i18n-placeholder="form_name_placeholder">
             </div>
             <div class="form-group">
-              <label for="user-phone">Tu número de WhatsApp</label>
-              <input type="tel" id="user-phone" class="form-control" placeholder="09XXXXXXXX" required>
+              <label for="user-phone" data-i18n="form_phone">Tu número de WhatsApp</label>
+              <input type="tel" id="user-phone" class="form-control" placeholder="09XXXXXXXX" required data-i18n-placeholder="form_phone_placeholder">
             </div>
             <div class="form-group">
-              <label for="user-service">Servicio de interés</label>
+              <label for="user-service" data-i18n="form_service">Servicio de interés</label>
               <select id="user-service" class="form-control" required>
-                <option value="" disabled selected>Selecciona un servicio...</option>
-                <option value="Consultoría de Beleza">Consultoría de Beleza</option>
-                <option value="Skincare Personalizado">Skincare Personalizado</option>
-                <option value="Maquiagem Profissional">Maquiagem Profissional</option>
-                <option value="Outros Serviços">Outros Serviços</option>
+                <option value="" disabled selected data-i18n="form_service_placeholder">Selecciona un servicio...</option>
+                <option value="Consultoría de Beleza" data-i18n="service_1">Consultoría de Beleza</option>
+                <option value="Skincare Personalizado" data-i18n="service_2">Skincare Personalizado</option>
+                <option value="Maquiagem Profissional" data-i18n="service_3">Maquiagem Profissional</option>
+                <option value="Outros Serviços" data-i18n="service_4">Outros Serviços</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="user-msg">Mensaje (opcional)</label>
+              <label for="user-msg" data-i18n="form_msg">Mensaje (opcional)</label>
               <textarea id="user-msg" class="form-control" rows="3"
-                placeholder="Cuéntanos qué buscas o cuándo quieres tu cita..."></textarea>
+                placeholder="Cuéntanos qué buscas o cuándo quieres tu cita..." data-i18n-placeholder="form_msg_placeholder"></textarea>
             </div>
             <button type="submit" class="btn-form-wpp">
-              <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
+              <i class="fab fa-whatsapp"></i> <span data-i18n="form_btn">Enviar por WhatsApp</span>
             </button>
           </form>
         </div>
@@ -2186,8 +2214,8 @@
   <section id="benefits" aria-label="Nossos diferenciais">
     <div class="container">
       <div class="section-header fade-in">
-        <p class="section-label">Por que escolher</p>
-        <h2 class="section-title">Nossos <em>diferenciais</em></h2>
+        <p class="section-label" data-i18n="benefits_label">Por que escolher</p>
+        <h2 class="section-title" data-i18n="benefits_title">Nossos diferenciais</h2>
       </div>
       <div class="benefits-grid">
         <div class="benefit-card fade-in">
@@ -2222,53 +2250,48 @@
   <section id="testimonials" aria-label="Depoimentos de clientes">
     <div class="container">
       <div class="section-header fade-in">
-        <p class="section-label">Quem já comprou</p>
-        <h2 class="section-title">O que <em>dizem</em> nossas clientes</h2>
-        <p>Mais de 2.500 clientes satisfeitas — veja o que elas têm a dizer.</p>
+        <p class="section-label" data-i18n="testimonials_label">Quem já comprou</p>
+        <h2 class="section-title"><span data-i18n="testimonials_title">O que dizem nossas clientes</span></h2>
+        <p data-i18n="testimonials_sub">Mais de 2.500 clientes satisfeitas — veja o que elas têm a dizer.</p>
       </div>
       <div class="testimonials-grid">
 
         <article class="testimonial-card fade-in">
           <div class="t-stars" aria-label="5 estrelas">★★★★★</div>
-          <p class="t-text">"Amei tudo! Os produtos chegaram super rápido e bem embalados. O sérum de vitamina C
-            transformou minha pele. Já fiz meu segundo pedido!"</p>
+          <p class="t-text" data-i18n="review_1_text">"Amei tudo! Os produtos chegaram super rápido e bem embalados. O sérum de vitamina C transformou minha pele. Já fiz meu segundo pedido!"</p>
           <div class="t-author">
             <div
               style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--rose-light),var(--rose-deep));border:3px solid var(--rose-light);display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:600;font-size:15px;"
               aria-hidden="true">A</div>
             <div>
-              <div class="t-name">Ana Carolina</div>
-              <div class="t-desc">Cliente há 8 meses</div>
+              <div class="t-name" data-i18n="review_1_author">Ana Carolina</div>
+              <div class="t-desc" data-i18n="review_1_time">Cliente há 8 meses</div>
             </div>
           </div>
         </article>
 
         <article class="testimonial-card fade-in">
           <div class="t-stars" aria-label="5 estrelas">★★★★★</div>
-          <p class="t-text">"Atendimento incrível! A Vick me ajudou a escolher a base certa para meu tom de pele. A
-            qualidade dos produtos é exatamente o que eu precisava."</p>
+          <p class="t-text" data-i18n="review_2_text">"Atendimento incrível! A Vick me ajudou a escolher a base certa para meu tom de pele. A qualidade dos produtos é exatamente o que eu precisava."</p>
           <div class="t-author">
-            <div
-              style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--nude),var(--gold));border:3px solid var(--rose-light);display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:600;font-size:15px;"
-              aria-hidden="true">J</div>
+            <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--nude),var(--gold));border:3px solid var(--rose-light);display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:600;font-size:15px;" aria-hidden="true">J</div>
             <div>
-              <div class="t-name">Juliana Ferreira</div>
-              <div class="t-desc">Cliente há 1 ano</div>
+              <div class="t-name" data-i18n="review_2_author">Juliana Ferreira</div>
+              <div class="t-desc" data-i18n="review_2_time">Cliente há 1 ano</div>
             </div>
           </div>
         </article>
 
         <article class="testimonial-card fade-in">
           <div class="t-stars" aria-label="5 estrelas">★★★★★</div>
-          <p class="t-text">"Compro sempre aqui! Produtos originais, preços ótimos e a entrega é super rápida. Indico
-            para todas as minhas amigas sem hesitar."</p>
+          <p class="t-text" data-i18n="review_3_text">"Compro sempre aqui! Produtos originais, preços ótimos e a entrega é super rápida. Indico para todas as minhas amigas sem hesitar."</p>
           <div class="t-author">
             <div
               style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#EEC5CF,var(--rose-deep));border:3px solid var(--rose-light);display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:600;font-size:15px;"
               aria-hidden="true">M</div>
             <div>
-              <div class="t-name">Marina Oliveira</div>
-              <div class="t-desc">Cliente fiel</div>
+              <div class="t-name" data-i18n="review_3_author">Marina Oliveira</div>
+              <div class="t-desc" data-i18n="review_3_time">Cliente fiel</div>
             </div>
           </div>
         </article>
@@ -2281,15 +2304,14 @@
   <section id="cta" aria-label="Chamada para ação">
     <div class="container">
       <div class="cta-inner fade-in">
-        <div class="cta-tag"><i class="fab fa-whatsapp" aria-hidden="true"></i> Atendimento agora</div>
-        <h2 class="cta-title">Pronta para <em>realçar<br>sua beleza?</em></h2>
-        <p class="cta-sub">Fale com a gente pelo WhatsApp e receba uma consultoria personalizada. Estamos aqui para te
-          ajudar a encontrar os produtos perfeitos para você.</p>
+        <div class="cta-tag"><i class="fab fa-whatsapp" aria-hidden="true"></i> <span data-i18n="trust_support">Atendimento agora</span></div>
+        <h2 class="cta-title" data-i18n="cta_title">Pronta para realçar sua beleza?</h2>
+        <p class="cta-sub" data-i18n="cta_sub">Fale com a gente pelo WhatsApp e receba uma consultoria personalizada. Estamos aqui para te ajudar a encontrar os produtos perfeitos para você.</p>
         <div class="cta-actions">
           <a href="https://wa.me/593987595039?text=Olá! Gostaria de uma consultoria de beleza" class="btn btn-cta-wpp"
             target="_blank" rel="noopener" aria-label="Iniciar consultoria pelo WhatsApp">
             <i class="fab fa-whatsapp" aria-hidden="true"></i>
-            Peça pelo WhatsApp
+            <span data-i18n="cta_btn">Peça pelo WhatsApp</span>
           </a>
           <a href="#products" class="btn btn-outline-white">
             <i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i>
@@ -2375,24 +2397,27 @@
   <div class="cart-overlay" id="cart-overlay"></div>
   <div class="cart-drawer" id="cart-drawer">
     <div class="cart-header">
-      <h2>Meu Carrinho</h2>
+      <h2 data-i18n="cart_title">Meu Carrinho</h2>
       <button class="close-cart" id="close-cart"><i class="fas fa-times"></i></button>
     </div>
     <div class="cart-items" id="cart-items-container">
-      <p class="cart-empty-msg">Seu carrinho está vazio</p>
+      <p class="cart-empty-msg" data-i18n="cart_empty">Seu carrinho está vazio</p>
     </div>
     <div class="cart-footer">
       <div class="cart-total">
-        <span>Total</span>
-        <span id="cart-total-value">R$ 0,00</span>
+        <span data-i18n="cart_total">Total</span>
+        <span id="cart-total-value">USD$ 0,00</span>
       </div>
       <button class="btn-checkout" id="generate-order">
-        <i class="fab fa-whatsapp"></i> Generar Orden
+        <i class="fab fa-whatsapp"></i> <span data-i18n="cart_btn_order">Generar Orden</span>
       </button>
     </div>
   </div>
 
   <script>
+    // ─── i18n GLOBAL ───
+    let translations = {};
+
     // ─── CART LOGIC ───
     let cart = JSON.parse(localStorage.getItem('vick_cart')) || [];
 
@@ -2428,8 +2453,8 @@
 
     function renderCart() {
       if (cart.length === 0) {
-        cartItemsContainer.innerHTML = '<p class="cart-empty-msg">Seu carrinho está vazio</p>';
-        cartTotalValue.textContent = 'R$ 0,00';
+        cartItemsContainer.innerHTML = `<p class="cart-empty-msg" data-i18n="cart_empty">${translations.cart_empty || 'Seu carrinho está vazio'}</p>`;
+        cartTotalValue.textContent = 'USD$ 0,00';
         return;
       }
 
@@ -2462,7 +2487,7 @@
           <img src="${item.img}" alt="${item.name}" class="cart-item-img">
           <div class="cart-item-info">
             <h4 class="cart-item-title">${item.name}</h4>
-            <div class="cart-item-price">R$ ${item.price.toFixed(2).replace('.', ',')}</div>
+            <div class="cart-item-price">USD$ ${item.price.toFixed(2).replace('.', ',')}</div>
             <div class="cart-item-qty">
               <button class="qty-btn minus" data-index="${index}">-</button>
               <span class="qty-display">${item.qty}</span>
@@ -2474,7 +2499,7 @@
         cartItemsContainer.appendChild(itemEl);
       });
 
-      cartTotalValue.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+      cartTotalValue.textContent = `USD$ ${total.toFixed(2).replace('.', ',')}`;
 
       // Re-attach listeners after full render
       attachCartListeners();
@@ -2519,9 +2544,6 @@
         cart.push({ ...product, qty: 1 });
       }
       updateCart();
-      if (!cartDrawer.classList.contains('active')) {
-        toggleCart();
-      }
     }
 
     document.querySelectorAll('.add-to-cart').forEach(btn => {
@@ -2546,10 +2568,10 @@
       cart.forEach(item => {
         const subtotal = item.price * item.qty;
         total += subtotal;
-        message += `• ${item.qty}x ${item.name} - R$ ${subtotal.toFixed(2).replace('.', ',')}\n`;
+        message += `• ${item.qty}x ${item.name} - USD$ ${subtotal.toFixed(2).replace('.', ',')}\n`;
       });
 
-      message += `\nTotal do Pedido: R$ ${total.toFixed(2).replace('.', ',')}`;
+      message += `\nTotal do Pedido: USD$ ${total.toFixed(2).replace('.', ',')}`;
       message += "\n\nPor favor, me informe o link para pagamento e prazo de entrega.";
 
       const encodedMessage = encodeURIComponent(message);
@@ -2631,12 +2653,50 @@
           `• *Servicio:* ${service}\n` +
           `• *Mensaje:* ${msg || 'Sem mensagem'}`;
 
-        // WhatsApp number from the screenshot: 593 98 759 5039
         const whatsappUrl = `https://wa.me/593987595039?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
         appointmentForm.reset();
       });
     }
+
+    // ─── i18n LOGIC ───
+    const langSwitcher = document.getElementById('lang-switcher');
+
+    async function loadLanguage(lang) {
+      try {
+        const response = await fetch(`${lang}.json`);
+        translations = await response.json();
+        applyTranslations();
+        localStorage.setItem('vick_lang', lang);
+        langSwitcher.value = lang;
+      } catch (err) {
+        console.error('Error loading translation:', err);
+        // Fallback or alert if file protocol issue
+      }
+    }
+
+    function applyTranslations() {
+      // Normal elements
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[key]) {
+          el.textContent = translations[key];
+        }
+      });
+      // Placeholder support
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (translations[key]) {
+          el.placeholder = translations[key];
+        }
+      });
+    }
+
+    langSwitcher.addEventListener('change', (e) => loadLanguage(e.target.value));
+
+    // Initialize Language
+    const savedLang = localStorage.getItem('vick_lang') || 'es';
+    loadLanguage(savedLang);
   </script>
 </body>
 
