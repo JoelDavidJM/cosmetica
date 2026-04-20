@@ -155,7 +155,11 @@
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-card);
       user-select: none;
-      cursor: col-resize;
+      cursor: grab;
+    }
+
+    .image-comparison.dragging {
+      cursor: grabbing;
     }
 
     .image-comparison__image {
@@ -185,7 +189,8 @@
       background: var(--white);
       z-index: 3;
       transform: translateX(-50%);
-      pointer-events: none;
+      pointer-events: auto;
+      cursor: grab;
     }
 
     .image-comparison__slider::before {
@@ -232,6 +237,37 @@
 
     .label-before { left: 20px; }
     .label-after { right: 20px; }
+
+    .ba-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(4px);
+      border: none;
+      color: var(--rose-dark);
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      box-shadow: var(--shadow-soft);
+      transition: var(--transition);
+    }
+
+    .ba-nav-btn:hover {
+      background: var(--white);
+      color: var(--rose-deep);
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: var(--shadow-card);
+    }
+
+    .ba-nav-btn.prev { left: 20px; }
+    .ba-nav-btn.next { right: 20px; }
 
     /* ─── NAVBAR ─── */
     #navbar {
@@ -2462,10 +2498,13 @@
       </div>
 
       <div class="image-comparison fade-in" id="image-comparison">
+        <button class="ba-nav-btn prev" id="ba-prev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+        <button class="ba-nav-btn next" id="ba-next" aria-label="Próximo"><i class="fas fa-chevron-right"></i></button>
+        
         <img src="./before1.jpeg" class="image-comparison__image image-comparison__before"
-          alt="Pele antes do tratamento">
+          alt="Pele antes do tratamento" draggable="false">
         <img src="./after1.jpeg" class="image-comparison__image image-comparison__after"
-          alt="Pele depois do tratamento">
+          alt="Pele depois do tratamento" draggable="false">
         <div class="image-comparison__slider"></div>
         <span class="label-before" data-i18n="ba_before">Antes</span>
         <span class="label-after" data-i18n="ba_after">Depois</span>
@@ -2849,11 +2888,20 @@
     const comparisonSlider = document.getElementById('image-comparison');
     if (comparisonSlider) {
       const afterImg = comparisonSlider.querySelector('.image-comparison__after');
+      const beforeImg = comparisonSlider.querySelector('.image-comparison__before');
       const sliderLine = comparisonSlider.querySelector('.image-comparison__slider');
+      const prevBtn = document.getElementById('ba-prev');
+      const nextBtn = document.getElementById('ba-next');
+      
+      let currentSet = 1;
+      const totalSets = 2; 
+      let isDragging = false;
 
       const moveSlider = (e) => {
+        if (!isDragging) return;
         const rect = comparisonSlider.getBoundingClientRect();
-        let x = (e.pageX || (e.touches && e.touches[0].pageX)) - rect.left - window.scrollX;
+        let pageX = e.pageX || (e.touches && e.touches[0].pageX);
+        let x = pageX - rect.left - window.scrollX;
 
         // Constraint
         if (x < 0) x = 0;
@@ -2864,8 +2912,65 @@
         sliderLine.style.left = `${percent}%`;
       };
 
-      comparisonSlider.addEventListener('mousemove', moveSlider);
-      comparisonSlider.addEventListener('touchmove', moveSlider);
+      const startDragging = (e) => {
+        isDragging = true;
+        comparisonSlider.classList.add('dragging');
+        moveSlider(e);
+      };
+
+      const stopDragging = () => {
+        isDragging = false;
+        comparisonSlider.classList.remove('dragging');
+      };
+
+      // Dragging events - restrict to the slider handle (line/bolita)
+      sliderLine.addEventListener('mousedown', (e) => {
+        e.preventDefault(); // Prevent text selection/drag
+        startDragging(e);
+      });
+
+      sliderLine.addEventListener('touchstart', (e) => {
+        startDragging(e);
+      }, { passive: false });
+
+      window.addEventListener('mousemove', moveSlider);
+      window.addEventListener('touchmove', (e) => {
+        if (isDragging) {
+          if (e.cancelable) e.preventDefault();
+          moveSlider(e);
+        }
+      }, { passive: false });
+
+      window.addEventListener('mouseup', stopDragging);
+      window.addEventListener('touchend', stopDragging);
+
+      const updateSet = (newSet) => {
+        currentSet = newSet;
+        beforeImg.src = `./before${currentSet}.jpeg`;
+        afterImg.src = `./after${currentSet}.jpeg`;
+        
+        // Reset slider position for the new image
+        afterImg.style.clipPath = `inset(0 0 0 50%)`;
+        sliderLine.style.left = `50%`;
+      };
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          let set = currentSet - 1;
+          if (set < 1) set = totalSets;
+          updateSet(set);
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          let set = currentSet + 1;
+          if (set > totalSets) set = 1;
+          updateSet(set);
+        });
+      }
     }
 
     // Initialize Language
