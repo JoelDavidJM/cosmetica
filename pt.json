@@ -98,5 +98,10 @@
   "cart_btn_order": "Gerar Pedido",
   "msg_cart_intro": "Olá! Gostaria de fazer um pedido:",
   "msg_cart_total": "Total do Pedido:",
-  "msg_cart_footer": "Por favor, me informe o link para pagamento e prazo de entrega."
+  "msg_cart_footer": "Por favor, me informe o link para pagamento e prazo de entrega.",
+  "ba_label": "Resultados Reais",
+  "ba_title": "Galeria Antes e Depois",
+  "ba_sub": "Arraste a linha para comparar os resultados incríveis que nossos tratamentos proporcionam.",
+  "ba_before": "Antes",
+  "ba_after": "Depois"
 }

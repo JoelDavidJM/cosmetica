@@ -98,5 +98,10 @@
   "cart_btn_order": "Generate Order",
   "msg_cart_intro": "Hello! I would like to place an order:",
   "msg_cart_total": "Order Total:",
-  "msg_cart_footer": "Please let me know the payment link and delivery time."
+  "msg_cart_footer": "Please let me know the payment link and delivery time.",
+  "ba_label": "Real Results",
+  "ba_title": "Before and After Gallery",
+  "ba_sub": "Drag the line to compare the incredible results our treatments provide.",
+  "ba_before": "Before",
+  "ba_after": "After"
 }

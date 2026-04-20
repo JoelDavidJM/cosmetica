@@ -114,6 +114,125 @@
       transform: none;
     }
 
+    /* ─── ENTRANCE ANIMATIONS ─── */
+    @keyframes slideFromLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-100px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideFromRight {
+      from {
+        opacity: 0;
+        transform: translateX(100px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* ─── BEFORE & AFTER SLIDER ─── */
+    #before-after {
+      padding: 100px 0;
+      background: var(--white);
+    }
+
+    .image-comparison {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      user-select: none;
+      cursor: col-resize;
+    }
+
+    .image-comparison__image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .image-comparison__before {
+      z-index: 1;
+    }
+
+    .image-comparison__after {
+      z-index: 2;
+      clip-path: inset(0 0 0 50%); /* Initial split */
+    }
+
+    .image-comparison__slider {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 4px;
+      background: var(--white);
+      z-index: 3;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .image-comparison__slider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 48px;
+      height: 48px;
+      background: var(--white);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .image-comparison__slider::after {
+      content: '↔';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+      color: var(--rose-dark);
+      font-weight: bold;
+    }
+
+    .label-before,
+    .label-after {
+      position: absolute;
+      top: 20px;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(4px);
+      color: var(--text-dark);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-radius: 50px;
+      z-index: 4;
+      pointer-events: none;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .label-before { left: 20px; }
+    .label-after { right: 20px; }
+
     /* ─── NAVBAR ─── */
     #navbar {
       position: fixed;
@@ -444,10 +563,15 @@
       box-shadow: var(--shadow-card);
     }
 
+    .hero-content {
+      animation: slideFromLeft 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
     .hero-visual {
       display: flex;
       justify-content: center;
       align-items: center;
+      animation: slideFromRight 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
     }
 
     .hero-img-frame {
@@ -1931,11 +2055,16 @@
   <section id="trust-bar" aria-label="Diferenciais">
     <div class="container">
       <ul class="trust-list" role="list">
-        <li class="trust-item"><i class="fas fa-shield-halved" aria-hidden="true"></i> <span data-i18n="trust_cert">Produtos Certificados</span></li>
-        <li class="trust-item"><i class="fas fa-truck-fast" aria-hidden="true"></i> <span data-i18n="trust_delivery">Entrega Rápida</span></li>
-        <li class="trust-item"><i class="fas fa-star" aria-hidden="true"></i> <span data-i18n="trust_rating">4.9 de avaliação</span></li>
-        <li class="trust-item"><i class="fas fa-lock" aria-hidden="true"></i> <span data-i18n="trust_payment">Pagamento Seguro</span></li>
-        <li class="trust-item"><i class="fas fa-headset" aria-hidden="true"></i> <span data-i18n="trust_support">Suporte Personalizado</span></li>
+        <li class="trust-item"><i class="fas fa-shield-halved" aria-hidden="true"></i> <span
+            data-i18n="trust_cert">Produtos Certificados</span></li>
+        <li class="trust-item"><i class="fas fa-truck-fast" aria-hidden="true"></i> <span
+            data-i18n="trust_delivery">Entrega Rápida</span></li>
+        <li class="trust-item"><i class="fas fa-star" aria-hidden="true"></i> <span data-i18n="trust_rating">4.9 de
+            avaliação</span></li>
+        <li class="trust-item"><i class="fas fa-lock" aria-hidden="true"></i> <span data-i18n="trust_payment">Pagamento
+            Seguro</span></li>
+        <li class="trust-item"><i class="fas fa-headset" aria-hidden="true"></i> <span data-i18n="trust_support">Suporte
+            Personalizado</span></li>
       </ul>
     </div>
   </section>
@@ -1949,17 +2078,19 @@
             style="background:linear-gradient(145deg,#F5EDE4,#EEC5CF,#E8A4B4);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:var(--rose-dark);">
             <i class="fas fa-heart" style="font-size:3rem;opacity:0.4; z-index: 2;"></i>
             <span
-              style="z-index: 2; font-family:var(--font-display);font-size:1.1rem;font-style:italic;color:var(--rose-dark);opacity:0.7;" data-i18n="about_img_love">Cuidado
+              style="z-index: 2; font-family:var(--font-display);font-size:1.1rem;font-style:italic;color:var(--rose-dark);opacity:0.7;"
+              data-i18n="about_img_love">Cuidado
               &amp; Amor</span>
-              <img class="img-heart" src="./heart.png" alt="">
+            <img class="img-heart" src="./heart.png" alt="">
           </div>
           <div class="about-img-fg"
             style="z-index: 2; background:linear-gradient(145deg,#FDF0F3,#F5D6DF);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--rose-deep);">
             <i class="fas fa-gem" style="font-size:2rem;opacity:0.45; z-index: 2;"></i>
             <span
-              style="z-index: 2; font-size:11px;text-align:center;padding:0 12px;color:var(--text-light);font-weight:400;" data-i18n="about_img_quality">Produtos
+              style="z-index: 2; font-size:11px;text-align:center;padding:0 12px;color:var(--text-light);font-weight:400;"
+              data-i18n="about_img_quality">Produtos
               originais e de qualidade</span>
-              <img class="img-flower" src="./flower.png" alt="">
+            <img class="img-flower" src="./flower.png" alt="">
           </div>
           <div class="about-accent" aria-hidden="true">
             <i class="fas fa-leaf"></i>
@@ -2148,7 +2279,8 @@
         <div class="appointments-info fade-in">
           <p class="section-label" data-i18n="appointments_label">Contactanos</p>
           <h2 class="section-title"><span data-i18n="appointments_title">Agenda tu cita hoy</span></h2>
-          <p data-i18n="appointments_p">Estamos listas para atenderte. Escríbenos por WhatsApp o llena el formulario y te contactamos pronto.</p>
+          <p data-i18n="appointments_p">Estamos listas para atenderte. Escríbenos por WhatsApp o llena el formulario y
+            te contactamos pronto.</p>
 
           <div class="contact-list" style="margin-top:20px;display:flex;flex-direction:column;gap:20px;">
             <div class="contact-item-box">
@@ -2191,16 +2323,19 @@
           <form id="appointment-form">
             <div class="form-group">
               <label for="user-name" data-i18n="form_name">Tu nombre</label>
-              <input type="text" id="user-name" class="form-control" placeholder="Ej. María González" required data-i18n-placeholder="form_name_placeholder">
+              <input type="text" id="user-name" class="form-control" placeholder="Ej. María González" required
+                data-i18n-placeholder="form_name_placeholder">
             </div>
             <div class="form-group">
               <label for="user-phone" data-i18n="form_phone">Tu número de WhatsApp</label>
-              <input type="tel" id="user-phone" class="form-control" placeholder="09XXXXXXXX" required data-i18n-placeholder="form_phone_placeholder">
+              <input type="tel" id="user-phone" class="form-control" placeholder="09XXXXXXXX" required
+                data-i18n-placeholder="form_phone_placeholder">
             </div>
             <div class="form-group">
               <label for="user-service" data-i18n="form_service">Servicio de interés</label>
               <select id="user-service" class="form-control" required>
-                <option value="" disabled selected data-i18n="form_service_placeholder">Selecciona un servicio...</option>
+                <option value="" disabled selected data-i18n="form_service_placeholder">Selecciona un servicio...
+                </option>
                 <option value="Consultoría de Beleza" data-i18n="service_1">Consultoría de Beleza</option>
                 <option value="Skincare Personalizado" data-i18n="service_2">Skincare Personalizado</option>
                 <option value="Maquiagem Profissional" data-i18n="service_3">Maquiagem Profissional</option>
@@ -2210,7 +2345,8 @@
             <div class="form-group">
               <label for="user-msg" data-i18n="form_msg">Mensaje (opcional)</label>
               <textarea id="user-msg" class="form-control" rows="3"
-                placeholder="Cuéntanos qué buscas o cuándo quieres tu cita..." data-i18n-placeholder="form_msg_placeholder"></textarea>
+                placeholder="Cuéntanos qué buscas o cuándo quieres tu cita..."
+                data-i18n-placeholder="form_msg_placeholder"></textarea>
             </div>
             <button type="submit" class="btn-form-wpp">
               <i class="fab fa-whatsapp"></i> <span data-i18n="form_btn">Enviar por WhatsApp</span>
@@ -2270,7 +2406,8 @@
 
         <article class="testimonial-card fade-in">
           <div class="t-stars" aria-label="5 estrelas">★★★★★</div>
-          <p class="t-text" data-i18n="review_1_text">"Amei tudo! Os produtos chegaram super rápido e bem embalados. O sérum de vitamina C transformou minha pele. Já fiz meu segundo pedido!"</p>
+          <p class="t-text" data-i18n="review_1_text">"Amei tudo! Os produtos chegaram super rápido e bem embalados. O
+            sérum de vitamina C transformou minha pele. Já fiz meu segundo pedido!"</p>
           <div class="t-author">
             <div
               style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--rose-light),var(--rose-deep));border:3px solid var(--rose-light);display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:600;font-size:15px;"
@@ -2284,9 +2421,12 @@
 
         <article class="testimonial-card fade-in">
           <div class="t-stars" aria-label="5 estrelas">★★★★★</div>
-          <p class="t-text" data-i18n="review_2_text">"Atendimento incrível! A Vick me ajudou a escolher a base certa para meu tom de pele. A qualidade dos produtos é exatamente o que eu precisava."</p>
+          <p class="t-text" data-i18n="review_2_text">"Atendimento incrível! A Vick me ajudou a escolher a base certa
+            para meu tom de pele. A qualidade dos produtos é exatamente o que eu precisava."</p>
           <div class="t-author">
-            <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--nude),var(--gold));border:3px solid var(--rose-light);display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:600;font-size:15px;" aria-hidden="true">J</div>
+            <div
+              style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--nude),var(--gold));border:3px solid var(--rose-light);display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:600;font-size:15px;"
+              aria-hidden="true">J</div>
             <div>
               <div class="t-name" data-i18n="review_2_author">Juliana Ferreira</div>
               <div class="t-desc" data-i18n="review_2_time">Cliente há 1 ano</div>
@@ -2296,7 +2436,8 @@
 
         <article class="testimonial-card fade-in">
           <div class="t-stars" aria-label="5 estrelas">★★★★★</div>
-          <p class="t-text" data-i18n="review_3_text">"Compro sempre aqui! Produtos originais, preços ótimos e a entrega é super rápida. Indico para todas as minhas amigas sem hesitar."</p>
+          <p class="t-text" data-i18n="review_3_text">"Compro sempre aqui! Produtos originais, preços ótimos e a entrega
+            é super rápida. Indico para todas as minhas amigas sem hesitar."</p>
           <div class="t-author">
             <div
               style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#EEC5CF,var(--rose-deep));border:3px solid var(--rose-light);display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:600;font-size:15px;"
@@ -2312,24 +2453,22 @@
     </div>
   </section>
 
-  <!-- ── CTA ── -->
-  <section id="cta" aria-label="Chamada para ação">
+  <!-- ── BEFORE & AFTER ── -->
+  <section id="before-after" aria-label="Galeria Antes e Depois">
     <div class="container">
-      <div class="cta-inner fade-in">
-        <div class="cta-tag"><i class="fab fa-whatsapp" aria-hidden="true"></i> <span data-i18n="trust_support">Atendimento agora</span></div>
-        <h2 class="cta-title" data-i18n="cta_title">Pronta para realçar sua beleza?</h2>
-        <p class="cta-sub" data-i18n="cta_sub">Fale com a gente pelo WhatsApp e receba uma consultoria personalizada. Estamos aqui para te ajudar a encontrar os produtos perfeitos para você.</p>
-        <div class="cta-actions">
-          <a href="https://wa.me/593987595039?text=Olá! Gostaria de uma consultoria de beleza" class="btn btn-cta-wpp"
-            target="_blank" rel="noopener" aria-label="Iniciar consultoria pelo WhatsApp">
-            <i class="fab fa-whatsapp" aria-hidden="true"></i>
-            <span data-i18n="cta_btn">Peça pelo WhatsApp</span>
-          </a>
-          <a href="#products" class="btn btn-outline-white">
-            <i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i>
-            Ver Produtos
-          </a>
-        </div>
+      <div class="section-header fade-in">
+        <p class="section-label" data-i18n="ba_label">Resultados Reais</p>
+        <h2 class="section-title" data-i18n="ba_title">Galeria <em>Antes e Depois</em></h2>
+      </div>
+
+      <div class="image-comparison fade-in" id="image-comparison">
+        <img src="./before1.jpeg" class="image-comparison__image image-comparison__before"
+          alt="Pele antes do tratamento">
+        <img src="./after1.jpeg" class="image-comparison__image image-comparison__after"
+          alt="Pele depois do tratamento">
+        <div class="image-comparison__slider"></div>
+        <span class="label-before" data-i18n="ba_before">Antes</span>
+        <span class="label-after" data-i18n="ba_after">Depois</span>
       </div>
     </div>
   </section>
@@ -2705,6 +2844,29 @@
     }
 
     langSwitcher.addEventListener('change', (e) => loadLanguage(e.target.value));
+
+    // Before & After Slider Logic
+    const comparisonSlider = document.getElementById('image-comparison');
+    if (comparisonSlider) {
+      const afterImg = comparisonSlider.querySelector('.image-comparison__after');
+      const sliderLine = comparisonSlider.querySelector('.image-comparison__slider');
+
+      const moveSlider = (e) => {
+        const rect = comparisonSlider.getBoundingClientRect();
+        let x = (e.pageX || (e.touches && e.touches[0].pageX)) - rect.left - window.scrollX;
+
+        // Constraint
+        if (x < 0) x = 0;
+        if (x > rect.width) x = rect.width;
+
+        const percent = (x / rect.width) * 100;
+        afterImg.style.clipPath = `inset(0 0 0 ${percent}%)`;
+        sliderLine.style.left = `${percent}%`;
+      };
+
+      comparisonSlider.addEventListener('mousemove', moveSlider);
+      comparisonSlider.addEventListener('touchmove', moveSlider);
+    }
 
     // Initialize Language
     const savedLang = localStorage.getItem('vick_lang') || 'es';
