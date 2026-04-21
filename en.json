@@ -45,6 +45,10 @@
   "prod_2_name": "Full Coverage Liquid Foundation",
   "prod_3_name": "Rose Intense Floral Perfume",
   "prod_4_name": "SPF 60 Sunscreen",
+  "prod_5_name": "Facial Moisturizing Cream",
+  "prod_6_name": "Long-Lasting Matte Lipstick",
+  "prod_7_name": "Essential Brush Kit",
+  "prod_8_name": "Revitalizing Body Scrub",
   "appointments_label": "Contact Us",
   "appointments_title": "Book your appointment today",
   "appointments_p": "We are ready to assist you. Text us on WhatsApp or fill out the form and we will contact you soon.",
@@ -104,5 +108,12 @@
   "ba_title": "Before and After Gallery",
   "ba_sub": "Drag the line to compare the incredible results our treatments provide.",
   "ba_before": "Before",
-  "ba_after": "After"
+  "ba_after": "After",
+  "search_placeholder": "Search by name...",
+  "msg_appt_intro": "Hi! I would like to book an appointment:",
+  "msg_appt_name": "Name",
+  "msg_appt_phone": "WhatsApp",
+  "msg_appt_service": "Service",
+  "msg_appt_message": "Message",
+  "msg_appt_no_msg": "No message"
 }

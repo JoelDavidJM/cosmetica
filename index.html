@@ -277,13 +277,13 @@
       right: 0;
       z-index: 100;
       padding: 18px 0;
-      transition: var(--transition);
+      transition: background 0.25s ease, padding 0.3s ease, box-shadow 0.3s ease;
     }
 
     #navbar.scrolled {
-      background: rgba(255, 255, 255, 0.96);
+      background: rgba(255, 255, 255, 0.98);
       backdrop-filter: blur(12px);
-      box-shadow: 0 2px 20px rgba(180, 110, 130, 0.10);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       padding: 12px 0;
     }
 
@@ -908,6 +908,15 @@
     .product-card:hover {
       transform: translateY(-8px);
       box-shadow: var(--shadow-hover);
+    }
+
+    .product-card.extra-product {
+      display: none;
+    }
+
+    #product-search:focus {
+      border-color: var(--rose-deep);
+      box-shadow: 0 0 0 4px var(--rose-pale);
     }
 
     .product-img-wrap {
@@ -1956,8 +1965,11 @@
 
     @media (max-width: 768px) {
       .nav-cart {
-        margin-left: auto;
+        margin-left: 5em;
         margin-right: 15px;
+      }
+      #wpp-float {
+        right: 71px;
       }
     }
 
@@ -1978,6 +1990,117 @@
       position: absolute;
       z-index: 0;
     }
+        @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .img-heart{
+        height: 17em;
+      }
+
+      .img-flower {
+        height: 10em;
+      }
+
+      .about-img-fg {
+    position: absolute;
+    bottom: -46px;
+    right: 30px;
+      }
+      
+      .hamburger {
+        display: flex;
+        left: -3em;
+        position: relative;
+      }
+
+      /* Ajuste del navbar en móvil */
+      #navbar {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        padding: 12px 0;
+      }
+
+      #navbar:not(.scrolled) {
+        background: rgba(0, 0, 0, 0.3);
+      }
+
+      .nav-logo {
+        color: var(--white);
+        font-size: 1.3rem;
+      }
+
+      #navbar:not(.scrolled) .nav-logo {
+        color: var(--white);
+      }
+
+      .nav-cart {
+        color: var(--white);
+        margin-right: 12px;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-visual {
+        display: none;
+      }
+
+      .hero-sub {
+        margin: 0 auto 36px;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-imgs {
+        height: 320px;
+      }
+
+      .about-stats {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+
+      .trust-item {
+        border-right: none;
+        border-bottom: 1px solid var(--gray-200);
+        width: 100%;
+        justify-content: center;
+      }
+
+      .trust-item:last-child {
+        border-bottom: none;
+      }
+
+      /* Ajuste del padding del hero en móvil */
+      #hero {
+        padding: 90px 0 60px;
+        min-height: auto;
+      }
+    }
   </style>
 </head>
 
@@ -1990,7 +2113,6 @@
         <div class="nav-inner">
           <a href="#" class="nav-logo" aria-label="Vick Cosmétics - Início">Cosmétics</a>
           <ul class="nav-links" role="list">
-            <li><a href="#" data-i18n="nav_home">Inicio</a></li>
             <li><a href="#about" data-i18n="nav_about">Sobre</a></li>
             <li><a href="#products" data-i18n="nav_products">Produtos</a></li>
             <li><a href="#appointments" data-i18n="nav_appointments">Citas</a></li>
@@ -2175,8 +2297,17 @@
       <div class="section-header fade-in">
         <p class="section-label" data-i18n="nav_products">Produtos</p>
         <h2 class="section-title" data-i18n="products_title">Produtos em destaque</h2>
-        <p data-i18n="products_sub">Selecionados com cuidado para oferecer o melhor em beleza e cuidados pessoais.</p>
+        <p data-i18n="products_sub">Selecionados com cuidado para oferecer lo mejor em beleza e cuidados pessoais.</p>
       </div>
+
+      <div class="product-filter-container fade-in" style="margin-bottom: 40px; display: flex; justify-content: center; width: 100%;">
+        <div class="search-box" style="position: relative; width: 100%; max-width: 450px;">
+          <i class="fas fa-search" style="position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--rose-deep); opacity: 0.7; font-size: 16px;"></i>
+          <input type="text" id="product-search" data-i18n-placeholder="search_placeholder" placeholder="Buscar por nombre..." 
+            style="width: 100%; padding: 16px 20px 16px 50px; border-radius: 50px; border: 1px solid var(--gray-200); background: var(--white); font-family: var(--font-body); font-size: 15px; color: var(--text-dark); outline: none; transition: var(--transition); box-shadow: var(--shadow-soft);">
+        </div>
+      </div>
+
       <div class="products-grid" role="list">
 
         <!-- Card 1 -->
@@ -2204,7 +2335,6 @@
             <div class="product-price-row">
               <div>
                 <span class="product-price">USD$ 89,90</span>
-                <span class="product-old-price">USD$ 119,90</span>
               </div>
               <div class="product-stars" aria-label="5 estrelas">★★★★★</div>
             </div>
@@ -2263,7 +2393,6 @@
             <div class="product-price-row">
               <div>
                 <span class="product-price">USD$ 149,90</span>
-                <span class="product-old-price">USD$ 189,90</span>
               </div>
               <div class="product-stars" aria-label="5 estrelas">★★★★★</div>
             </div>
@@ -2299,13 +2428,125 @@
           </div>
         </article>
 
+        <!-- Card 5 -->
+        <article class="product-card fade-in extra-product" role="listitem" data-id="5" data-name="Crema Hidratante Facial"
+          data-price="45.00" data-img="./first-removebg-preview.png">
+          <div class="product-img-wrap">
+            <div class="placeholder-img"
+              style="background:linear-gradient(145deg,#FDF0F3,#E8A4B4,#F5D6DF);opacity:0.9;">
+              <img src="./five.png" alt="Crema Hidratante Facial">
+            </div>
+            <div class="product-actions-hover">
+              <button class="btn-buy-card add-to-cart" aria-label="Adicionar Crema Hidratante ao carrinho">
+                <i class="fas fa-bag-shopping" aria-hidden="true"></i> <span data-i18n="products_btn_buy">Comprar</span>
+              </button>
+              <a href="https://wa.me/593987595039?text=Quero saber mais sobre a Crema Hidratante" class="btn-wpp-card"
+                target="_blank" rel="noopener">
+                <i class="fab fa-whatsapp" aria-hidden="true"></i> <span data-i18n="btn_wpp">WPP</span>
+              </a>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-cat" data-i18n="cat_skincare">Skincare</div>
+            <h3 class="product-name" data-i18n="prod_5_name">Crema Hidratante Facial</h3>
+            <div class="product-price-row">
+              <span class="product-price">USD$ 45,00</span>
+              <div class="product-stars" aria-label="5 estrelas">★★★★★</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="product-card fade-in extra-product" role="listitem" data-id="6" data-name="Labial Mate"
+          data-price="15.00" data-img="./second-removebg-preview.png">
+          <div class="product-img-wrap">
+            <div class="placeholder-img"
+              style="background:linear-gradient(145deg,#F5EDE4,#E8D5C4,#EDE8E5);opacity:0.9;">
+              <img src="./six.png" alt="Labial Mate">
+            </div>
+            <div class="product-actions-hover">
+              <button class="btn-buy-card add-to-cart" aria-label="Adicionar Labial ao carrinho">
+                <i class="fas fa-bag-shopping" aria-hidden="true"></i> <span data-i18n="products_btn_buy">Comprar</span>
+              </button>
+              <a href="https://wa.me/593987595039?text=Quero saber mais sobre o Labial Mate" class="btn-wpp-card"
+                target="_blank" rel="noopener">
+                <i class="fab fa-whatsapp" aria-hidden="true"></i> <span data-i18n="btn_wpp">WPP</span>
+              </a>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-cat" data-i18n="cat_makeup">Maquillaje</div>
+            <h3 class="product-name" data-i18n="prod_6_name">Labial Mate Larga Duración</h3>
+            <div class="product-price-row">
+              <span class="product-price">USD$ 15,00</span>
+              <div class="product-stars" aria-label="5 estrelas">★★★★★</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 7 -->
+        <article class="product-card fade-in extra-product" role="listitem" data-id="7" data-name="Kit de Brochas"
+          data-price="30.00" data-img="./three-removebg-preview.png">
+          <div class="product-img-wrap">
+            <div class="placeholder-img"
+              style="background:linear-gradient(145deg,#F8F6F5,#B8ADA8,#EDE8E5);opacity:0.9;">
+              <img src="./seven.png" alt="Kit de Brochas">
+            </div>
+            <span class="product-badge sale">-50%</span>
+            <div class="product-actions-hover">
+              <button class="btn-buy-card add-to-cart" aria-label="Adicionar Kit de Brochas ao carrinho">
+                <i class="fas fa-bag-shopping" aria-hidden="true"></i> <span data-i18n="products_btn_buy">Comprar</span>
+              </button>
+              <a href="https://wa.me/593987595039?text=Quero saber más sobre el Kit de Brochas" class="btn-wpp-card"
+                target="_blank" rel="noopener">
+                <i class="fab fa-whatsapp" aria-hidden="true"></i> <span data-i18n="btn_wpp">WPP</span>
+              </a>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-cat" data-i18n="cat_makeup">Maquillaje</div>
+            <h3 class="product-name" data-i18n="prod_7_name">Kit de Brochas Esenciales</h3>
+            <div class="product-price-row">
+              <span class="product-price">USD$ 30,00</span>
+              <div class="product-stars" aria-label="5 estrelas">★★★★★</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 8 -->
+        <article class="product-card fade-in extra-product" role="listitem" data-id="8" data-name="Exfoliante Corporal"
+          data-price="25.00" data-img="./fourt-removebg-preview.png">
+          <div class="product-img-wrap">
+            <div class="placeholder-img"
+              style="background:linear-gradient(145deg,#F5EDE4,#C9A96E,#E8D5A8);opacity:0.9;">
+              <img src="./height.png" alt="Exfoliante Corporal">
+            </div>
+            <div class="product-actions-hover">
+              <button class="btn-buy-card add-to-cart" aria-label="Adicionar Exfoliante ao carrinho">
+                <i class="fas fa-bag-shopping" aria-hidden="true"></i> <span data-i18n="products_btn_buy">Comprar</span>
+              </button>
+              <a href="https://wa.me/593987595039?text=Quero saber más sobre el Exfoliante Corporal" class="btn-wpp-card"
+                target="_blank" rel="noopener">
+                <i class="fab fa-whatsapp" aria-hidden="true"></i> <span data-i18n="btn_wpp">WPP</span>
+              </a>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-cat" data-i18n="cat_skincare">Skincare</div>
+            <h3 class="product-name" data-i18n="prod_8_name">Exfoliante Corporal Revitalizante</h3>
+            <div class="product-price-row">
+              <span class="product-price">USD$ 25,00</span>
+              <div class="product-stars" aria-label="5 estrelas">★★★★★</div>
+            </div>
+          </div>
+        </article>
+
       </div>
       <div style="text-align:center;margin-top:48px;" class="fade-in">
-        <a href="https://wa.me/593987595039?text=Olá! Gostaria de ver mais produtos" class="btn btn-rose"
-          target="_blank" rel="noopener" aria-label="Ver todos os produtos pelo WhatsApp">
-          <i class="fab fa-whatsapp" aria-hidden="true"></i>
-          <span data-i18n="products_btn_more">Ver Todos os Produtos</span>
-        </a>
+        <button id="show-more-products" class="btn btn-rose" aria-label="Ver más productos">
+          <i class="fas fa-plus" aria-hidden="true"></i>
+          <span data-i18n="products_btn_more">Ver Todos los Productos</span>
+        </button>
       </div>
     </div>
   </section>
@@ -2738,8 +2979,9 @@
       updateCart();
     }
 
-    document.querySelectorAll('.add-to-cart').forEach(btn => {
-      btn.addEventListener('click', () => {
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.add-to-cart');
+      if (btn) {
         const card = btn.closest('.product-card');
         const product = {
           id: card.dataset.id,
@@ -2748,7 +2990,7 @@
           img: card.dataset.img
         };
         addToCart(product);
-      });
+      }
     });
 
     generateOrderBtn.addEventListener('click', () => {
@@ -2783,6 +3025,56 @@
       }, 800);
     });
 
+    // Product filtering
+    const productSearch = document.getElementById('product-search');
+    if (productSearch) {
+      productSearch.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        const cards = document.querySelectorAll('.product-card');
+        
+        cards.forEach(card => {
+          const name = card.dataset.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+          const isMatch = name.includes(query);
+          
+          if (isMatch) {
+            card.style.display = 'block';
+            card.classList.add('visible');
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        const showMoreContainer = document.getElementById('show-more-products')?.closest('.fade-in');
+        if (showMoreContainer) {
+          showMoreContainer.style.display = query.length > 0 ? 'none' : 'block';
+        }
+        
+        if (query.length === 0) {
+          document.querySelectorAll('.product-card.extra-product:not(.shown)').forEach(card => {
+            card.style.display = 'none';
+            card.classList.remove('visible');
+          });
+        }
+      });
+    }
+
+
+    // Show more products
+    const showMoreBtn = document.getElementById('show-more-products');
+    if (showMoreBtn) {
+      showMoreBtn.addEventListener('click', () => {
+        const extraProducts = document.querySelectorAll('.product-card.extra-product');
+        extraProducts.forEach(prod => {
+          prod.style.display = 'block';
+          prod.classList.add('shown'); // Mark as permanently shown
+          setTimeout(() => {
+            prod.classList.add('visible');
+          }, 50);
+        });
+        showMoreBtn.closest('.fade-in').style.display = 'none';
+      });
+    }
+
     // Initialize
     renderCart();
     updateCartCount();
@@ -2791,7 +3083,7 @@
     // Navbar scroll
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 40);
+      navbar.classList.toggle('scrolled', window.scrollY > 10);
     }, { passive: true });
 
     // Hamburger
@@ -2836,14 +3128,15 @@
         e.preventDefault();
         const name = document.getElementById('user-name').value;
         const phone = document.getElementById('user-phone').value;
-        const service = document.getElementById('user-service').value;
+        const serviceSelect = document.getElementById('user-service');
+        const service = serviceSelect.options[serviceSelect.selectedIndex].text;
         const msg = document.getElementById('user-msg').value;
 
-        const message = `Olá! Gostaria de agendar uma cita:\n\n` +
-          `• *Nombre:* ${name}\n` +
-          `• *WhatsApp:* ${phone}\n` +
-          `• *Servicio:* ${service}\n` +
-          `• *Mensaje:* ${msg || 'Sem mensagem'}`;
+        const message = `${translations.msg_appt_intro || "¡Hola! Me gustaría agendar una cita:"}\n\n` +
+          `• *${translations.msg_appt_name || "Nombre"}:* ${name}\n` +
+          `• *${translations.msg_appt_phone || "WhatsApp"}:* ${phone}\n` +
+          `• *${translations.msg_appt_service || "Servicio"}:* ${service}\n` +
+          `• *${translations.msg_appt_message || "Mensaje"}:* ${msg || (translations.msg_appt_no_msg || 'Sin mensaje')}`;
 
         const whatsappUrl = `https://wa.me/593987595039?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');

@@ -45,7 +45,11 @@
   "prod_2_name": "Base Líquida Cobertura Total",
   "prod_3_name": "Perfume Floral Rose Intense",
   "prod_4_name": "Protetor Solar FPS 60",
-  "appointments_label": "Contactanos",
+  "prod_5_name": "Creme Hidratante Facial",
+  "prod_6_name": "Batom Matte Longa Duração",
+  "prod_7_name": "Kit de Pincéis Essenciais",
+  "prod_8_name": "Esfoliante Corporal Revitalizante",
+  "appointments_label": "Contate-nos",
   "appointments_title": "Agenda tu cita hoy",
   "appointments_p": "Estamos listas para atenderte. Escríbenos por WhatsApp o llena el formulario y te contactamos pronto.",
   "form_title": "Solicita información",
@@ -104,5 +108,12 @@
   "ba_title": "Galeria Antes e Depois",
   "ba_sub": "Arraste a linha para comparar os resultados incríveis que nossos tratamentos proporcionam.",
   "ba_before": "Antes",
-  "ba_after": "Depois"
+  "ba_after": "Depois",
+  "search_placeholder": "Buscar por nome...",
+  "msg_appt_intro": "Olá! Gostaria de agendar uma consulta:",
+  "msg_appt_name": "Nome",
+  "msg_appt_phone": "WhatsApp",
+  "msg_appt_service": "Serviço",
+  "msg_appt_message": "Mensagem",
+  "msg_appt_no_msg": "Sem mensagem"
 }
