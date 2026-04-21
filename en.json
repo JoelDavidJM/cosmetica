@@ -115,5 +115,6 @@
   "msg_appt_phone": "WhatsApp",
   "msg_appt_service": "Service",
   "msg_appt_message": "Message",
-  "msg_appt_no_msg": "No message"
+  "msg_appt_no_msg": "No message",
+  "wpp_float_msg": "Hello! I'm coming from the website and I would like more information"
 }

@@ -3236,6 +3236,13 @@
           el.placeholder = translations[key];
         }
       });
+
+      // WhatsApp floating button update
+      const wppFloat = document.getElementById('wpp-float');
+      if (wppFloat && translations.wpp_float_msg) {
+        const baseUrl = "https://wa.me/593939675278?text=";
+        wppFloat.href = baseUrl + encodeURIComponent(translations.wpp_float_msg);
+      }
     }
 
     langSwitcher.addEventListener('change', (e) => loadLanguage(e.target.value));
