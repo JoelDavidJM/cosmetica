@@ -281,6 +281,69 @@
       right: 20px;
     }
 
+    /* ─── BEFORE & AFTER THUMBNAILS ─── */
+    .ba-thumbnails {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .ba-thumbnail {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: var(--transition);
+      box-shadow: var(--shadow-soft);
+      opacity: 0.7;
+      position: relative;
+    }
+
+    .ba-thumbnail::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.2);
+      transition: var(--transition);
+    }
+
+    .ba-thumbnail:hover {
+      transform: translateY(-4px);
+      opacity: 1;
+      box-shadow: var(--shadow-card);
+    }
+
+    .ba-thumbnail:hover::after {
+      background: transparent;
+    }
+
+    .ba-thumbnail.active {
+      border-color: var(--rose-deep);
+      opacity: 1;
+      transform: scale(1.05);
+      box-shadow: var(--shadow-card);
+    }
+
+    .ba-thumbnail.active::after {
+      background: transparent;
+    }
+
+    .ba-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @media (max-width: 480px) {
+      .ba-thumbnail {
+        width: 60px;
+        height: 60px;
+      }
+    }
+
     /* ─── NAVBAR ─── */
     #navbar {
       position: fixed;
@@ -710,6 +773,27 @@
 
     .hero-scroll:hover {
       color: var(--white);
+    }
+
+    /* ─── PIXEL DESTRUCTION EFFECT ─── */
+    .pixel-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .pixel {
+      width: 100.2%;
+      /* Slight overlap to avoid gaps */
+      height: 100.2%;
+      background-repeat: no-repeat;
+      will-change: transform, opacity;
+      transition: transform 0.1s linear, opacity 0.1s linear;
     }
 
     .scroll-line {
@@ -2820,6 +2904,15 @@
         <span class="label-before" data-i18n="ba_before">Antes</span>
         <span class="label-after" data-i18n="ba_after">Depois</span>
       </div>
+
+      <div class="ba-thumbnails fade-in" id="ba-thumbnails">
+        <div class="ba-thumbnail active" data-set="1" aria-label="Ver resultado 1">
+          <img src="./after1.jpeg" alt="Resultado 1">
+        </div>
+        <div class="ba-thumbnail" data-set="2" aria-label="Ver resultado 2">
+          <img src="./after2.jpeg" alt="Resultado 2">
+        </div>
+      </div>
     </div>
   </section>
 
@@ -3194,8 +3287,149 @@
     // ─── EXISTING UI LOGIC ───
     // Navbar scroll
     const navbar = document.getElementById('navbar');
+    const heroImg = document.querySelector('.img-elegancia');
+    const heroVisual = document.querySelector('.hero-img-content');
+    let pixels = [];
+
+    // Initialize Pixel Destruction
+    if (heroImg && heroVisual) {
+      const rows = 12;
+      const cols = 12;
+      const pixelContainer = document.createElement('div');
+      pixelContainer.className = 'pixel-container';
+      pixelContainer.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+      pixelContainer.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+
+      const imgUrl = heroImg.src;
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const pixel = document.createElement('div');
+          pixel.className = 'pixel';
+          pixel.style.backgroundImage = `url(${imgUrl})`;
+
+          const posX = (c / (cols - 1)) * 100;
+          const posY = (r / (rows - 1)) * 100;
+          pixel.style.backgroundPosition = `${posX}% ${posY}%`;
+          pixel.style.backgroundSize = `${cols * 100}% ${rows * 100}%`;
+
+          // Directed vectors: Down and Left (towards the next section's image)
+          pixel.dataset.vx = -300 - Math.random() * 500; // Move Left
+          pixel.dataset.vy = 500 + Math.random() * 700;  // Move Down
+          pixel.dataset.vr = (Math.random() - 0.5) * 360;
+
+          pixelContainer.appendChild(pixel);
+          pixels.push(pixel);
+        }
+      }
+
+      heroVisual.appendChild(pixelContainer);
+      heroImg.style.opacity = '0';
+      heroVisual.style.overflow = 'visible';
+    }
+
+    // Initialize Heart Image Reconstruction
+    const heartImg = document.querySelector('.img-heart');
+    const heartVisual = document.querySelector('.about-img-bg');
+    let heartPixels = [];
+
+    if (heartImg && heartVisual) {
+      const rows = 10;
+      const cols = 10;
+      const pixelContainer = document.createElement('div');
+      pixelContainer.className = 'pixel-container';
+      pixelContainer.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+      pixelContainer.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+
+      const imgUrl = heartImg.src;
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const pixel = document.createElement('div');
+          pixel.className = 'pixel';
+          pixel.style.backgroundImage = `url(${imgUrl})`;
+
+          const posX = (c / (cols - 1)) * 100;
+          const posY = (r / (rows - 1)) * 100;
+          pixel.style.backgroundPosition = `${posX}% ${posY}%`;
+          pixel.style.backgroundSize = `${cols * 100}% ${rows * 100}%`;
+
+          // Start from above and right (coming from the hero image's direction)
+          pixel.dataset.vx = 300 + Math.random() * 500;  // From Right
+          pixel.dataset.vy = -600 - Math.random() * 800; // From Top
+          pixel.dataset.vr = (Math.random() - 0.5) * 360;
+
+          // Initial scattered state (coming from the hero area)
+          pixel.style.transform = `translate(${pixel.dataset.vx}px, ${pixel.dataset.vy}px) rotate(${pixel.dataset.vr}deg)`;
+          pixel.style.opacity = '0';
+
+          pixelContainer.appendChild(pixel);
+          heartPixels.push(pixel);
+        }
+      }
+
+      heartVisual.appendChild(pixelContainer);
+      heartImg.style.opacity = '0';
+      heartVisual.style.position = 'relative';
+      heartVisual.style.overflow = 'visible';
+    }
+
     window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 10);
+      const scrollY = window.scrollY;
+      navbar.classList.toggle('scrolled', scrollY > 10);
+
+      // Hero Destruction (Dissolve Down)
+      if (pixels.length > 0) {
+        const threshold = 700;
+        let progress = Math.min(scrollY / threshold, 1);
+        const easedProgress = progress * progress;
+
+        pixels.forEach(p => {
+          if (progress <= 0) {
+            p.style.transform = 'none';
+            p.style.opacity = '1';
+          } else {
+            const vx = parseFloat(p.dataset.vx) * easedProgress;
+            const vy = parseFloat(p.dataset.vy) * easedProgress;
+            const vr = parseFloat(p.dataset.vr) * easedProgress;
+            const scale = 1 - (easedProgress * 0.5);
+            const opacity = 1 - easedProgress;
+            p.style.transform = `translate(${vx}px, ${vy}px) rotate(${vr}deg) scale(${scale})`;
+            p.style.opacity = opacity;
+          }
+        });
+      }
+
+      // Heart Reconstruction (Assemble from Above)
+      if (heartPixels.length > 0) {
+        const aboutSection = document.getElementById('about');
+        const rect = aboutSection.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+
+        // Calculate progress based on when #about enters the view
+        // 1 means fully in place, 0 means scattered
+        let progress = 0;
+        if (rect.top < viewportHeight) {
+          progress = Math.min(Math.max((viewportHeight - rect.top) / (viewportHeight * 0.8), 0), 1);
+        }
+
+        const invProgress = 1 - progress;
+        const easedInv = invProgress * invProgress;
+
+        heartPixels.forEach(p => {
+          if (progress >= 1) {
+            p.style.transform = 'none';
+            p.style.opacity = '1';
+          } else {
+            const vx = parseFloat(p.dataset.vx) * easedInv;
+            const vy = parseFloat(p.dataset.vy) * easedInv;
+            const vr = parseFloat(p.dataset.vr) * easedInv;
+            const opacity = progress; // Fade in as we reconstruct
+            p.style.transform = `translate(${vx}px, ${vy}px) rotate(${vr}deg)`;
+            p.style.opacity = opacity;
+          }
+        });
+      }
     }, { passive: true });
 
     // Hamburger
@@ -3366,7 +3600,19 @@
         // Reset slider position for the new image
         afterImg.style.clipPath = `inset(0 0 0 50%)`;
         sliderLine.style.left = `50%`;
+
+        // Update thumbnails active state
+        document.querySelectorAll('.ba-thumbnail').forEach(thumb => {
+          thumb.classList.toggle('active', parseInt(thumb.dataset.set) === currentSet);
+        });
       };
+
+      // Add thumbnail listeners
+      document.querySelectorAll('.ba-thumbnail').forEach(thumb => {
+        thumb.addEventListener('click', () => {
+          updateSet(parseInt(thumb.dataset.set));
+        });
+      });
 
       if (prevBtn) {
         prevBtn.addEventListener('click', (e) => {
