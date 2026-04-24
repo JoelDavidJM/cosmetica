@@ -1987,6 +1987,7 @@
       .appointments-form-side {
         padding: 30px;
       }
+
       .nav-links {
         gap: 0;
       }
@@ -2179,7 +2180,8 @@
             <li><a href="#benefits" data-i18n="nav_benefits">Benefícios</a></li>
             <li><a href="#testimonials" data-i18n="nav_testimonials">Avaliações</a></li>
             <li><a href="#before-after" data-i18n="nav_gallery">Galeria</a></li>
-            <li><a href="https://wa.me/593939675278" class="nav-cta" aria-label="Falar via WhatsApp"><i class="fab fa-whatsapp"></i> <span data-i18n="nav_whatsapp">WhatsApp</span></a></li>
+            <li><a href="https://wa.me/593939675278" class="nav-cta" aria-label="Falar via WhatsApp"><i
+                  class="fab fa-whatsapp"></i> <span data-i18n="nav_whatsapp">WhatsApp</span></a></li>
           </ul>
           <div class="nav-extra">
             <select id="lang-switcher" class="lang-select" aria-label="Cambiar idioma">
@@ -2204,7 +2206,8 @@
         <a href="#benefits" data-i18n="nav_benefits">Benefícios</a>
         <a href="#testimonials" data-i18n="nav_testimonials">Avaliações</a>
         <a href="#before-after" data-i18n="nav_gallery">Galeria</a>
-        <a href="https://wa.me/593939675278"><i class="fab fa-whatsapp"></i> &nbsp;<span data-i18n="nav_whatsapp">WhatsApp</span></a>
+        <a href="https://wa.me/593939675278"><i class="fab fa-whatsapp"></i> &nbsp;<span
+            data-i18n="nav_whatsapp">WhatsApp</span></a>
       </div>
     </nav>
   </header>
@@ -2709,25 +2712,29 @@
         <div class="benefit-card fade-in">
           <div class="benefit-icon" aria-hidden="true"><i class="fas fa-shield-halved"></i></div>
           <h3 class="benefit-title" data-i18n="benefits_1_title">Produtos Originais</h3>
-          <p class="benefit-desc" data-i18n="benefits_1_desc">Trabalhamos apenas com marcas certificadas e produtos 100% originais, garantindo
+          <p class="benefit-desc" data-i18n="benefits_1_desc">Trabalhamos apenas com marcas certificadas e produtos 100%
+            originais, garantindo
             segurança e eficácia para sua pele.</p>
         </div>
         <div class="benefit-card fade-in">
           <div class="benefit-icon" aria-hidden="true"><i class="fas fa-truck-fast"></i></div>
           <h3 class="benefit-title" data-i18n="benefits_2_title">Entrega Rápida</h3>
-          <p class="benefit-desc" data-i18n="benefits_2_desc">Enviamos com agilidade para todo o Brasil. Seu pedido chega embalado com cuidado e no
+          <p class="benefit-desc" data-i18n="benefits_2_desc">Enviamos com agilidade para todo o Brasil. Seu pedido
+            chega embalado com cuidado e no
             menor tempo possível.</p>
         </div>
         <div class="benefit-card fade-in">
           <div class="benefit-icon" aria-hidden="true"><i class="fas fa-heart-pulse"></i></div>
           <h3 class="benefit-title" data-i18n="benefits_3_title">Atendimento Personalizado</h3>
-          <p class="benefit-desc" data-i18n="benefits_3_desc">Nossa equipe está pronta para te ajudar a encontrar os melhores produtos para o seu
+          <p class="benefit-desc" data-i18n="benefits_3_desc">Nossa equipe está pronta para te ajudar a encontrar os
+            melhores produtos para o seu
             tipo de pele e necessidades.</p>
         </div>
         <div class="benefit-card fade-in">
           <div class="benefit-icon" aria-hidden="true"><i class="fas fa-lock"></i></div>
           <h3 class="benefit-title" data-i18n="benefits_4_title">Pagamento Seguro</h3>
-          <p class="benefit-desc" data-i18n="benefits_4_desc">Diversas formas de pagamento com total segurança. PIX, cartão de crédito, débito e
+          <p class="benefit-desc" data-i18n="benefits_4_desc">Diversas formas de pagamento com total segurança. PIX,
+            cartão de crédito, débito e
             boleto disponíveis.</p>
         </div>
       </div>
@@ -2908,6 +2915,7 @@
     </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
     // ─── i18n GLOBAL ───
     let translations = {};
@@ -3068,6 +3076,49 @@
 
       message += `\n${translations.msg_cart_total || "Total do Pedido:"} USD$ ${total.toFixed(2).replace('.', ',')}`;
       message += `\n\n${translations.msg_cart_footer || "Por favor, me informe o link para pagamento e prazo de entrega."}`;
+
+      // Generate PDF and send via email
+      if (window.jspdf && window.jspdf.jsPDF) {
+        try {
+          const doc = new window.jspdf.jsPDF();
+          doc.setFontSize(18);
+          doc.text("Resumen de Compra - Cosmétics", 20, 20);
+
+          doc.setFontSize(12);
+          let y = 35;
+          cart.forEach(item => {
+            const subtotal = item.price * item.qty;
+            doc.text(`- ${item.qty}x ${item.name} ($${item.price.toFixed(2)}) = $${subtotal.toFixed(2)}`, 20, y);
+            y += 10;
+          });
+
+          y += 10;
+          doc.setFontSize(14);
+          doc.text(`Total: $${total.toFixed(2)}`, 20, y);
+          const pdfBlob = doc.output('blob');
+          const pdfFile = new File([pdfBlob], "orden_compra.pdf", { type: "application/pdf" });
+
+          let plainMessage = "Se ha generado una nueva orden:\n\n";
+          cart.forEach(item => {
+            const subtotal = item.price * item.qty;
+            plainMessage += `- ${item.qty}x ${item.name} ($${item.price.toFixed(2)}) = $${subtotal.toFixed(2)}\n`;
+          });
+          plainMessage += `\nTotal: $${total.toFixed(2)}`;
+
+          const formData = new FormData();
+          formData.append("email", "jodajativa17@gmail.com");
+          formData.append("_subject", "Nueva compra en Cosmétics");
+          formData.append("Detalle_de_la_Compra", plainMessage);
+          formData.append("attachment", pdfFile);
+
+          fetch("https://formsubmit.co/ajax/jodajativa17@gmail.com", {
+            method: "POST",
+            body: formData
+          }).catch(err => console.error("Error al enviar PDF", err));
+        } catch (e) {
+          console.error("Error generating PDF", e);
+        }
+      }
 
       const encodedMessage = encodeURIComponent(message);
       const whatsappUrl = `https://wa.me/593939675278?text=${encodedMessage}`;
