@@ -2922,7 +2922,7 @@
       <div class="footer-grid">
         <div class="footer-brand fade-in">
           <a href="#" class="footer-logo" aria-label="Vick Cosmétics">Cosmétics</a>
-          <p class="footer-tagline">Beleza que realça sua essência. Produtos originais, atendimento personalizado e amor
+          <p class="footer-tagline" data-i18n="footer_tagline">Beleza que realça sua essência. Produtos originais, atendimento personalizado e amor
             em cada detalhe.</p>
           <div class="footer-social" role="list">
             <a href="https://wa.me/593939675278" class="social-btn" aria-label="WhatsApp" target="_blank"
@@ -2936,29 +2936,28 @@
           </div>
         </div>
         <div class="fade-in">
-          <h3 class="footer-col-title">Navegação</h3>
+          <h3 class="footer-col-title" data-i18n="footer_nav">Navegação</h3>
           <ul class="footer-links" role="list">
-            <li><a href="#about">Sobre a Loja</a></li>
-            <li><a href="#products">Produtos</a></li>
-            <li><a href="#benefits">Benefícios</a></li>
-            <li><a href="#testimonials">Avaliações</a></li>
+            <li><a href="#about" data-i18n="footer_about_store">Sobre a Loja</a></li>
+            <li><a href="#products" data-i18n="footer_products">Produtos</a></li>
+            <li><a href="#benefits" data-i18n="footer_benefits">Benefícios</a></li>
+            <li><a href="#testimonials" data-i18n="footer_testimonials">Avaliações</a></li>
           </ul>
         </div>
         <div class="fade-in">
-          <h3 class="footer-col-title">Categorias</h3>
+          <h3 class="footer-col-title" data-i18n="footer_cat">Categorias</h3>
           <ul class="footer-links" role="list">
-            <li><a href="#products">Skincare</a></li>
-            <li><a href="#products">Maquiagem</a></li>
-            <li><a href="#products">Fragrâncias</a></li>
-            <li><a href="#products">Proteção Solar</a></li>
+            <li><a href="#products" data-i18n="footer_skincare">Skincare</a></li>
+            <li><a href="#products" data-i18n="footer_makeup">Maquiagem</a></li>
+            <li><a href="#products" data-i18n="footer_fragrance">Fragrâncias</a></li>
+            <li><a href="#products" data-i18n="footer_protection">Proteção Solar</a></li>
           </ul>
         </div>
         <div class="fade-in">
-          <h3 class="footer-col-title">Contato</h3>
+          <h3 class="footer-col-title" data-i18n="footer_contact">Contato</h3>
           <div class="footer-contact-item">
             <i class="fab fa-whatsapp" aria-hidden="true"></i>
-            <div><a href="https://wa.me/593939675278" style="color:var(--gray-400);text-decoration:none;">(00)
-                00000-0000</a></div>
+            <div><a href="https://wa.me/593939675278" style="color:var(--gray-400);text-decoration:none;">+593 939675278</a></div>
           </div>
           <div class="footer-contact-item">
             <i class="fab fa-instagram" aria-hidden="true"></i>
@@ -2967,17 +2966,17 @@
           </div>
           <div class="footer-contact-item">
             <i class="fas fa-map-pin" aria-hidden="true"></i>
-            <div>Sua cidade, Estado</div>
+            <div data-i18n="footer_location">Sua cidade, Estado</div>
           </div>
           <div class="footer-contact-item">
             <i class="fas fa-clock" aria-hidden="true"></i>
-            <div>Seg–Sáb: 9h às 19h</div>
+            <div data-i18n="footer_hours">Seg–Sáb: 9h às 19h</div>
           </div>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2025 Cosmétics — Todos os direitos reservados.</span>
-        <span>Feito com <i class="fas fa-heart" style="color:var(--rose-deep);" aria-label="amor"></i> para você</span>
+        <span data-i18n="footer_rights">© 2025 Cosmétics — Todos os direitos reservados.</span>
+        <span data-i18n="footer_made">Feito com <i class="fas fa-heart" style="color:var(--rose-deep);" aria-label="amor"></i> para você</span>
       </div>
     </div>
   </footer>
@@ -3324,7 +3323,11 @@
       }
 
       heroVisual.appendChild(pixelContainer);
-      heroImg.style.opacity = '0';
+      if (window.innerWidth > 800) {
+        heroImg.style.opacity = '0';
+      } else {
+        heroImg.style.opacity = '1';
+      }
       heroVisual.style.overflow = 'visible';
     }
 
@@ -3369,14 +3372,42 @@
       }
 
       heartVisual.appendChild(pixelContainer);
-      heartImg.style.opacity = '0';
+      if (window.innerWidth > 800) {
+        heartImg.style.opacity = '0';
+      } else {
+        heartImg.style.opacity = '1';
+      }
       heartVisual.style.position = 'relative';
       heartVisual.style.overflow = 'visible';
     }
 
+    let lastIsLargeScreen = window.matchMedia('(min-width: 801px)').matches;
+
     window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
       navbar.classList.toggle('scrolled', scrollY > 10);
+
+      const isLargeScreen = window.matchMedia('(min-width: 801px)').matches;
+
+      // Handle state change (breakpoint crossing)
+      if (isLargeScreen !== lastIsLargeScreen) {
+        if (!isLargeScreen) {
+          // Switch to Mobile: Show original images, hide pixels
+          if (heroImg) heroImg.style.opacity = '1';
+          pixels.forEach(p => { p.style.display = 'none'; });
+          if (heartImg) heartImg.style.opacity = '1';
+          heartPixels.forEach(p => { p.style.display = 'none'; });
+        } else {
+          // Switch to Desktop: Hide original images, show pixels
+          if (heroImg) heroImg.style.opacity = '0';
+          pixels.forEach(p => { p.style.display = 'block'; });
+          if (heartImg) heartImg.style.opacity = '0';
+          heartPixels.forEach(p => { p.style.display = 'block'; });
+        }
+        lastIsLargeScreen = isLargeScreen;
+      }
+
+      if (!isLargeScreen) return;
 
       // Hero Destruction (Dissolve Down)
       if (pixels.length > 0) {
@@ -3407,7 +3438,6 @@
         const viewportHeight = window.innerHeight;
 
         // Calculate progress based on when #about enters the view
-        // 1 means fully in place, 0 means scattered
         let progress = 0;
         if (rect.top < viewportHeight) {
           progress = Math.min(Math.max((viewportHeight - rect.top) / (viewportHeight * 0.8), 0), 1);
@@ -3431,6 +3461,17 @@
         });
       }
     }, { passive: true });
+
+    // Initial check to hide pixels on mobile load
+    if (!lastIsLargeScreen) {
+      pixels.forEach(p => { p.style.display = 'none'; });
+      heartPixels.forEach(p => { p.style.display = 'none'; });
+    }
+
+    // Handle Resize
+    window.addEventListener('resize', () => {
+      window.dispatchEvent(new Event('scroll'));
+    });
 
     // Hamburger
     const hamburger = document.getElementById('hamburger-btn');

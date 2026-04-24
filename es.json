@@ -123,5 +123,15 @@
   "msg_appt_service": "Servicio",
   "msg_appt_message": "Mensaje",
   "msg_appt_no_msg": "Sin mensaje",
-  "wpp_float_msg": "¡Hola! Vengo desde el sitio web y me gustaría más información"
+  "wpp_float_msg": "¡Hola! Vengo desde el sitio web y me gustaría más información",
+  "footer_about_store": "Sobre la Tienda",
+  "footer_products": "Productos",
+  "footer_benefits": "Beneficios",
+  "footer_testimonials": "Reseñas",
+  "footer_skincare": "Skincare",
+  "footer_makeup": "Maquillaje",
+  "footer_fragrance": "Fragancias",
+  "footer_protection": "Protección Solar",
+  "footer_location": "Montecristi, Manabí, Ecuador",
+  "footer_hours": "Lun–Sáb: 9h a 19h"
 }

@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cosmétics — Productos originales de belleza. Atendemos por WhatsApp." />
+  <title>Cosmétics — Belleza que realza tu esencia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rose: #C97A91;
+      --rose-dark: #8B4F63;
+      --rose-pale: #FDF0F3;
+      --rose-light: #F5D6DF;
+      --gold: #C9A96E;
+      --text: #2A1F1C;
+      --text-mid: #6B5550;
+      --text-light: #A89590;
+      --white: #FFFFFF;
+      --off-white: #FEFCFB;
+      --gray: #EDE8E5;
+      --gray-dark: #3D3330;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+      --radius: 16px;
+      --shadow: 0 4px 24px rgba(180,110,130,0.12);
+      --shadow-hover: 0 12px 40px rgba(180,110,130,0.22);
+      --transition: all 0.3s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--off-white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 0;
+      background: rgba(255,255,255,0);
+      transition: var(--transition);
+    }
+    nav.scrolled {
+      background: rgba(255,255,255,0.97);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      padding: 10px 0;
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.6rem; font-weight: 500;
+      color: var(--white); text-decoration: none;
+      transition: var(--transition);
+    }
+    nav.scrolled .nav-logo { color: var(--rose-dark); }
+
+    .nav-links { display: flex; gap: 8px; list-style: none; }
+    .nav-links a {
+      font-size: 13px; font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none; padding: 8px 14px; border-radius: 50px;
+      transition: var(--transition);
+    }
+    nav.scrolled .nav-links a { color: var(--text-mid); }
+    .nav-links a:hover { background: rgba(255,255,255,0.15); color: var(--white); }
+    nav.scrolled .nav-links a:hover { background: var(--rose-pale); color: var(--rose); }
+
+    .nav-wpp {
+      background: #25D366; color: var(--white) !important;
+      padding: 9px 20px !important; border-radius: 50px;
+      font-weight: 500 !important; font-size: 12.5px !important;
+      display: flex; align-items: center; gap: 7px;
+      box-shadow: 0 2px 12px rgba(37,211,102,0.3);
+    }
+    .nav-wpp:hover { background: #1da851 !important; transform: translateY(-1px); }
+
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--white); border-radius: 2px; transition: var(--transition);
+    }
+    nav.scrolled .hamburger span { background: var(--text); }
+
+    #mobile-menu {
+      display: none; flex-direction: column;
+      background: var(--white); border-top: 1px solid var(--gray);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    #mobile-menu.open { display: flex; }
+    #mobile-menu a {
+      padding: 14px 24px; font-size: 14px; font-weight: 500;
+      color: var(--text-mid); text-decoration: none;
+      border-bottom: 1px solid var(--gray); transition: var(--transition);
+    }
+    #mobile-menu a:hover { color: var(--rose); background: var(--rose-pale); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100svh;
+      background: linear-gradient(140deg, #A05070 0%, #C97A91 45%, #E8B4C4 100%);
+      display: flex; align-items: center;
+      padding: 120px 0 80px; position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(255,255,255,0.08) 0%, transparent 60%);
+    }
+    /* Decorative circle */
+    #hero::after {
+      content: '';
+      position: absolute; right: -120px; top: 50%;
+      transform: translateY(-50%);
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 580px; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(6px);
+      border-radius: 50px; padding: 7px 16px;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+      color: var(--white); text-transform: uppercase; margin-bottom: 28px;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 5.2rem);
+      font-weight: 400; color: var(--white); line-height: 1.08;
+      margin-bottom: 20px;
+    }
+    .hero-title em { font-style: italic; opacity: 0.88; font-size: 0.82em; display: block; }
+
+    .hero-sub {
+      font-size: 16px; font-weight: 300;
+      color: rgba(255,255,255,0.85); line-height: 1.75; margin-bottom: 40px;
+      max-width: 440px;
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-body); font-size: 13px; font-weight: 500;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      text-decoration: none; border-radius: 50px;
+      padding: 14px 30px; cursor: pointer; border: none; transition: var(--transition);
+    }
+    .btn-white { background: var(--white); color: var(--rose-dark); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+    .btn-white:hover { background: #FDF0F3; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+    .btn-wpp { background: #25D366; color: var(--white); box-shadow: 0 4px 16px rgba(37,211,102,0.35); }
+    .btn-wpp:hover { background: #1da851; transform: translateY(-2px); }
+    .btn-rose { background: var(--rose); color: var(--white); box-shadow: var(--shadow); }
+    .btn-rose:hover { background: var(--rose-dark); transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+
+    /* Hero stats */
+    .hero-stats {
+      display: flex; gap: 32px; margin-top: 48px;
+    }
+    .hero-stat { color: var(--white); }
+    .hero-stat-num {
+      font-family: var(--font-display); font-size: 2rem;
+      font-weight: 500; line-height: 1;
+    }
+    .hero-stat-label { font-size: 11px; opacity: 0.75; letter-spacing: 0.08em; margin-top: 3px; }
+
+    /* scroll cue */
+    .scroll-cue {
+      position: absolute; bottom: 28px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: rgba(255,255,255,0.6); font-size: 10px;
+      letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none;
+    }
+    .scroll-cue i { font-size: 14px; animation: bounce 2s ease infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0)}50%{transform:translateY(5px)} }
+
+    /* ── TRUST BAR ── */
+    #trust {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray);
+      padding: 16px 0;
+    }
+    .trust-list {
+      display: flex; flex-wrap: wrap; align-items: center;
+      justify-content: center; list-style: none; gap: 0;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 24px; font-size: 13px; font-weight: 400;
+      color: var(--text-mid); border-right: 1px solid var(--gray);
+    }
+    .trust-item:last-child { border-right: none; }
+    .trust-item i { color: var(--rose); font-size: 14px; }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 88px 0; }
+    .section-label {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--rose); margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      font-weight: 400; color: var(--text); line-height: 1.2;
+    }
+    .section-title em { font-style: italic; color: var(--rose); }
+    .section-header {
+      text-align: center; margin-bottom: 52px;
+    }
+    .section-header p {
+      font-size: 15px; font-weight: 300; color: var(--text-mid);
+      line-height: 1.7; margin-top: 12px; max-width: 480px; margin-inline: auto;
+    }
+
+    /* ── PRODUCTS ── */
+    #products { background: #F8F5F4; }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .product-card {
+      background: var(--white); border-radius: var(--radius);
+      overflow: hidden; border: 1px solid var(--gray);
+      box-shadow: var(--shadow); transition: var(--transition);
+    }
+    .product-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+
+    .product-img {
+      position: relative; aspect-ratio: 1/1;
+      background: var(--rose-pale);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; padding: 20px;
+    }
+    .product-img img {
+      width: 100%; height: 100%; object-fit: contain;
+      transition: transform 0.5s ease;
+    }
+    .product-card:hover .product-img img { transform: scale(1.06); }
+
+    .product-badge {
+      position: absolute; top: 12px; left: 12px;
+      background: var(--rose); color: var(--white);
+      font-size: 9px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 4px 11px; border-radius: 50px;
+    }
+    .product-badge.sale { background: var(--gold); }
+    .product-badge.new { background: var(--rose-dark); }
+
+    .product-info { padding: 16px 16px 18px; }
+    .product-cat {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--text-light); margin-bottom: 5px;
+    }
+    .product-name {
+      font-family: var(--font-display); font-size: 1.1rem;
+      font-weight: 500; color: var(--text); margin-bottom: 10px; line-height: 1.3;
+    }
+    .product-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .product-price { font-size: 1.1rem; font-weight: 500; color: var(--rose-dark); }
+    .product-stars { color: #F9C846; font-size: 11px; }
+
+    .product-wpp {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      width: 100%; margin-top: 12px; padding: 10px;
+      background: #25D366; color: var(--white);
+      border-radius: 10px; font-size: 12px; font-weight: 500;
+      text-decoration: none; letter-spacing: 0.04em;
+      transition: var(--transition);
+    }
+    .product-wpp:hover { background: #1da851; }
+
+    /* ── BENEFITS ── */
+    #benefits { background: var(--white); }
+
+    .benefits-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+    }
+    .benefit-card {
+      text-align: center; padding: 36px 20px;
+      border-radius: var(--radius);
+      background: var(--rose-pale); border: 1px solid var(--rose-light);
+      transition: var(--transition);
+    }
+    .benefit-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); background: var(--white); }
+
+    .benefit-icon {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--rose-light);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px; font-size: 20px; color: var(--rose-dark);
+      transition: var(--transition);
+    }
+    .benefit-card:hover .benefit-icon { background: var(--rose); color: var(--white); }
+    .benefit-title {
+      font-family: var(--font-display); font-size: 1.15rem;
+      font-weight: 500; color: var(--text); margin-bottom: 8px;
+    }
+    .benefit-desc { font-size: 13px; font-weight: 300; color: var(--text-mid); line-height: 1.7; }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: #F8F5F4; }
+
+    .t-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+    .t-card {
+      background: var(--white); border-radius: var(--radius);
+      padding: 28px; border: 1px solid var(--gray);
+      box-shadow: var(--shadow); transition: var(--transition);
+      position: relative;
+    }
+    .t-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+    .t-card::before {
+      content: '\201C';
+      position: absolute; top: 20px; right: 24px;
+      font-family: var(--font-display); font-size: 4rem; line-height: 1;
+      color: var(--rose-light);
+    }
+    .t-stars { color: #F9C846; font-size: 13px; margin-bottom: 14px; letter-spacing: 2px; }
+    .t-text {
+      font-size: 14px; font-weight: 300; color: var(--text-mid);
+      line-height: 1.8; font-style: italic; margin-bottom: 20px;
+    }
+    .t-author { display: flex; align-items: center; gap: 12px; }
+    .t-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 600; font-size: 15px; color: var(--white);
+      border: 3px solid var(--rose-light); flex-shrink: 0;
+    }
+    .t-name { font-size: 14px; font-weight: 500; color: var(--text); }
+    .t-desc { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--white);
+      padding: 88px 0;
+    }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+
+    .contact-info { display: flex; flex-direction: column; gap: 20px; }
+    .contact-info p { font-size: 15px; font-weight: 300; color: var(--text-mid); line-height: 1.75; }
+
+    .contact-items { display: flex; flex-direction: column; gap: 16px; margin-top: 8px; }
+    .contact-item {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .c-icon {
+      width: 42px; height: 42px; border-radius: 12px;
+      background: var(--rose-pale);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: var(--rose); flex-shrink: 0;
+    }
+    .c-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); }
+    .c-val { font-size: 15px; font-weight: 500; color: var(--text); margin-top: 1px; }
+
+    /* Form */
+    .contact-form {
+      background: #F8F5F4; border-radius: var(--radius);
+      padding: 36px; border: 1px solid var(--gray);
+    }
+    .form-title {
+      font-family: var(--font-display); font-size: 1.7rem; color: var(--text); margin-bottom: 22px;
+    }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 12px; font-weight: 500; color: var(--text-mid); margin-bottom: 6px; }
+    .form-control {
+      width: 100%; padding: 11px 16px;
+      border-radius: 10px; border: 1.5px solid var(--gray);
+      font-family: var(--font-body); font-size: 14px;
+      background: var(--white); transition: var(--transition);
+    }
+    .form-control:focus { outline: none; border-color: var(--rose); box-shadow: 0 0 0 3px rgba(201,122,145,0.1); }
+    .btn-form {
+      width: 100%; background: #25D366; color: var(--white);
+      padding: 14px; border-radius: 50px; border: none;
+      font-family: var(--font-body); font-weight: 500; font-size: 14px;
+      letter-spacing: 0.04em; cursor: pointer; margin-top: 6px;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: var(--transition);
+    }
+    .btn-form:hover { background: #1da851; transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--gray-dark);
+      padding: 48px 0 24px; color: #B8ADA8;
+    }
+    .footer-inner {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px; margin-bottom: 40px;
+    }
+    .footer-logo {
+      font-family: var(--font-display); font-size: 1.7rem;
+      font-weight: 400; color: var(--white); text-decoration: none; display: block; margin-bottom: 12px;
+    }
+    .footer-tagline { font-size: 13px; font-weight: 300; line-height: 1.7; }
+    .footer-social { display: flex; gap: 8px; margin-top: 16px; }
+    .s-btn {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      color: #B8ADA8; text-decoration: none; font-size: 13px; transition: var(--transition);
+    }
+    .s-btn:hover { background: var(--rose); border-color: var(--rose); color: var(--white); transform: translateY(-2px); }
+    .footer-col-title {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--white); margin-bottom: 18px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .footer-links a { font-size: 13px; font-weight: 300; color: #B8ADA8; text-decoration: none; transition: var(--transition); }
+    .footer-links a:hover { color: var(--rose-light); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.07); padding-top: 20px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; font-weight: 300; color: #7A6E6A;
+    }
+
+    /* ── WPP FLOAT ── */
+    #wpp-float {
+      position: fixed; bottom: 26px; right: 26px;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: #25D366; color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.45); z-index: 999;
+      transition: var(--transition);
+    }
+    #wpp-float:hover { background: #1da851; transform: scale(1.08); }
+    #wpp-float::before {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background: #25D366; animation: pulse 2.2s ease-out infinite; z-index: -1;
+    }
+    @keyframes pulse { 0%{opacity:.7;transform:scale(1)} 100%{opacity:0;transform:scale(1.65)} }
+
+    /* ── FADE IN ── */
+    .fade {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade.in { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-stats { gap: 20px; }
+      .t-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; gap: 6px; text-align: center; }
+      .trust-item { border-right: none; border-bottom: 1px solid var(--gray); width: 100%; justify-content: center; }
+      .trust-item:last-child { border-bottom: none; }
+    }
+    @media (max-width: 480px) {
+      .products-grid { grid-template-columns: 1fr; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 2.6rem; }
+      .hero-stats { flex-wrap: wrap; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Cosmétics</a>
+      <ul class="nav-links">
+        <li><a href="#products">Productos</a></li>
+        <li><a href="#benefits">Beneficios</a></li>
+        <li><a href="#testimonials">Reseñas</a></li>
+        <li><a href="#contact">Contacto</a></li>
+        <li><a href="https://wa.me/593939675278" class="nav-wpp"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+      </ul>
+      <button class="hamburger" id="ham-btn" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-menu">
+    <a href="#products">Productos</a>
+    <a href="#benefits">Beneficios</a>
+    <a href="#testimonials">Reseñas</a>
+    <a href="#contact">Contacto</a>
+    <a href="https://wa.me/593939675278"><i class="fab fa-whatsapp"></i> &nbsp;WhatsApp</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge"><i class="fas fa-star"></i> Productos 100% Originales</div>
+      <h1 class="hero-title">
+        Cosmétics
+        <em>Belleza que realza tu esencia</em>
+      </h1>
+      <p class="hero-sub">
+        Cosméticos originales seleccionados para realzar cada detalle de ti.
+        Calidad, elegancia y cuidado en cada producto.
+      </p>
+      <div class="hero-actions">
+        <a href="#products" class="btn btn-white">
+          <i class="fas fa-wand-magic-sparkles"></i> Ver Productos
+        </a>
+        <a href="https://wa.me/593939675278" class="btn btn-wpp" target="_blank" rel="noopener">
+          <i class="fab fa-whatsapp"></i> Hablar Ahora
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">2.5k+</div>
+          <div class="hero-stat-label">Clientes felices</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">4.9★</div>
+          <div class="hero-stat-label">Calificación</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">100%</div>
+          <div class="hero-stat-label">Original</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="#trust" class="scroll-cue"><span>Explorar</span><i class="fas fa-chevron-down"></i></a>
+</section>
+
+<!-- TRUST BAR -->
+<div id="trust">
+  <div class="container">
+    <ul class="trust-list">
+      <li class="trust-item"><i class="fas fa-shield-halved"></i> Productos Certificados</li>
+      <li class="trust-item"><i class="fas fa-truck-fast"></i> Entrega Rápida</li>
+      <li class="trust-item"><i class="fas fa-star"></i> 4.9 de calificación</li>
+      <li class="trust-item"><i class="fas fa-lock"></i> Pago Seguro</li>
+      <li class="trust-item"><i class="fas fa-headset"></i> Atención Personalizada</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="container">
+    <div class="section-header fade">
+      <p class="section-label">Catálogo</p>
+      <h2 class="section-title">Productos <em>destacados</em></h2>
+      <p>Seleccionados con cuidado para ofrecerte lo mejor en belleza y cuidado personal.</p>
+    </div>
+    <div class="products-grid">
+
+      <article class="product-card fade">
+        <div class="product-img" style="background:linear-gradient(145deg,#FDF0F3,#F5D6DF);">
+          <img src="./first-removebg-preview.png" alt="Sérum Facial Vitamina C">
+          <span class="product-badge new">Nuevo</span>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">Skincare</div>
+          <h3 class="product-name">Sérum Facial Vitamina C</h3>
+          <div class="product-bottom">
+            <span class="product-price">USD$ 89,90</span>
+            <span class="product-stars">★★★★★</span>
+          </div>
+          <a href="https://wa.me/593939675278?text=Hola! Me interesa el Sérum Facial Vitamina C" class="product-wpp" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Pedir por WhatsApp
+          </a>
+        </div>
+      </article>
+
+      <article class="product-card fade">
+        <div class="product-img" style="background:linear-gradient(145deg,#FBF7F4,#E8D5C4);">
+          <img src="./second-removebg-preview.png" alt="Base Líquida Cobertura Total">
+          <span class="product-badge">Destacado</span>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">Maquillaje</div>
+          <h3 class="product-name">Base Líquida Cobertura Total</h3>
+          <div class="product-bottom">
+            <span class="product-price">USD$ 64,90</span>
+            <span class="product-stars">★★★★★</span>
+          </div>
+          <a href="https://wa.me/593939675278?text=Hola! Me interesa la Base Líquida" class="product-wpp" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Pedir por WhatsApp
+          </a>
+        </div>
+      </article>
+
+      <article class="product-card fade">
+        <div class="product-img" style="background:linear-gradient(145deg,#FDF0F3,#EEC5CF);">
+          <img src="./three-removebg-preview.png" alt="Perfume Floral Rose Intense">
+          <span class="product-badge sale">-20%</span>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">Fragancias</div>
+          <h3 class="product-name">Perfume Floral Rose Intense</h3>
+          <div class="product-bottom">
+            <span class="product-price">USD$ 149,90</span>
+            <span class="product-stars">★★★★★</span>
+          </div>
+          <a href="https://wa.me/593939675278?text=Hola! Me interesa el Perfume Floral Rose" class="product-wpp" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Pedir por WhatsApp
+          </a>
+        </div>
+      </article>
+
+      <article class="product-card fade">
+        <div class="product-img" style="background:linear-gradient(145deg,#F5EDE4,#E8D5A8);">
+          <img src="./fourt-removebg-preview.png" alt="Protetor Solar FPS 60">
+          <span class="product-badge new">Nuevo</span>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">Protección</div>
+          <h3 class="product-name">Protector Solar FPS 60 con Color</h3>
+          <div class="product-bottom">
+            <span class="product-price">USD$ 79,90</span>
+            <span class="product-stars">★★★★★</span>
+          </div>
+          <a href="https://wa.me/593939675278?text=Hola! Me interesa el Protector Solar FPS 60" class="product-wpp" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Pedir por WhatsApp
+          </a>
+        </div>
+      </article>
+
+    </div>
+    <div style="text-align:center;margin-top:40px;" class="fade">
+      <a href="https://wa.me/593939675278?text=Hola! Quisiera ver el catálogo completo" class="btn btn-rose" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i> Ver catálogo completo
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section id="benefits">
+  <div class="container">
+    <div class="section-header fade">
+      <p class="section-label">Por qué elegirnos</p>
+      <h2 class="section-title">Nuestros <em>diferenciales</em></h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card fade">
+        <div class="benefit-icon"><i class="fas fa-shield-halved"></i></div>
+        <h3 class="benefit-title">Productos Originales</h3>
+        <p class="benefit-desc">Solo trabajamos con marcas certificadas y productos 100% originales para tu seguridad.</p>
+      </div>
+      <div class="benefit-card fade">
+        <div class="benefit-icon"><i class="fas fa-truck-fast"></i></div>
+        <h3 class="benefit-title">Entrega Rápida</h3>
+        <p class="benefit-desc">Enviamos con agilidad. Tu pedido llega bien empacado y en el menor tiempo posible.</p>
+      </div>
+      <div class="benefit-card fade">
+        <div class="benefit-icon"><i class="fas fa-heart-pulse"></i></div>
+        <h3 class="benefit-title">Atención Personalizada</h3>
+        <p class="benefit-desc">Te ayudamos a encontrar los productos ideales para tu tipo de piel y necesidades.</p>
+      </div>
+      <div class="benefit-card fade">
+        <div class="benefit-icon"><i class="fas fa-lock"></i></div>
+        <h3 class="benefit-title">Pago Seguro</h3>
+        <p class="benefit-desc">Múltiples métodos de pago con total seguridad. Tu compra siempre protegida.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-header fade">
+      <p class="section-label">Clientes felices</p>
+      <h2 class="section-title">Lo que dicen <em>nuestras clientas</em></h2>
+      <p>Más de 2.500 clientas satisfechas — lee sus experiencias.</p>
+    </div>
+    <div class="t-grid">
+      <article class="t-card fade">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">"¡Me encantó todo! Los productos llegaron super rápido y bien empacados. El sérum de vitamina C transformó mi piel. ¡Ya hice mi segundo pedido!"</p>
+        <div class="t-author">
+          <div class="t-avatar" style="background:linear-gradient(135deg,#F5D6DF,#C97A91);">A</div>
+          <div>
+            <div class="t-name">Ana Carolina</div>
+            <div class="t-desc">Clienta hace 8 meses</div>
+          </div>
+        </div>
+      </article>
+      <article class="t-card fade">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">"¡Atención increíble! Me ayudaron a elegir la base correcta para mi tono de piel. La calidad es exactamente lo que necesitaba."</p>
+        <div class="t-author">
+          <div class="t-avatar" style="background:linear-gradient(135deg,#E8D5C4,#C9A96E);">J</div>
+          <div>
+            <div class="t-name">Juliana Ferreira</div>
+            <div class="t-desc">Clienta hace 1 año</div>
+          </div>
+        </div>
+      </article>
+      <article class="t-card fade">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">"¡Siempre compro aquí! Productos originales, precios excelentes y entrega rapidísima. Los recomiendo a todas mis amigas."</p>
+        <div class="t-author">
+          <div class="t-avatar" style="background:linear-gradient(135deg,#EEC5CF,#C97A91);">M</div>
+          <div>
+            <div class="t-name">Marina Oliveira</div>
+            <div class="t-desc">Clienta fiel</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info fade">
+        <p class="section-label">Contáctanos</p>
+        <h2 class="section-title">Agenda tu <em>cita hoy</em></h2>
+        <p>Estamos listas para atenderte. Escríbenos por WhatsApp o llena el formulario y te contactamos pronto.</p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="c-icon"><i class="fas fa-location-dot"></i></div>
+            <div>
+              <div class="c-label">Ubicación</div>
+              <div class="c-val">Montecristi, Manabí, Ecuador</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="c-icon"><i class="fab fa-whatsapp"></i></div>
+            <div>
+              <div class="c-label">WhatsApp</div>
+              <div class="c-val">098 759 5039</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="c-icon"><i class="fab fa-instagram"></i></div>
+            <div>
+              <div class="c-label">Instagram</div>
+              <div class="c-val">@cosmeticos</div>
+            </div>
+          </div>
+        </div>
+        <a href="https://wa.me/593939675278" class="btn btn-wpp" style="margin-top:24px;align-self:flex-start;" target="_blank" rel="noopener">
+          <i class="fab fa-whatsapp"></i> Chatear por WhatsApp
+        </a>
+      </div>
+      <div class="contact-form fade">
+        <h3 class="form-title">Solicita información</h3>
+        <form id="contact-form">
+          <div class="form-group">
+            <label>Tu nombre</label>
+            <input type="text" class="form-control" placeholder="Ej. María González" required>
+          </div>
+          <div class="form-group">
+            <label>Número de WhatsApp</label>
+            <input type="tel" id="f-phone" class="form-control" placeholder="09XXXXXXXX" required>
+          </div>
+          <div class="form-group">
+            <label>Servicio de interés</label>
+            <select id="f-service" class="form-control" required>
+              <option value="" disabled selected>Selecciona un servicio...</option>
+              <option>Consultoría de Belleza</option>
+              <option>Skincare Personalizado</option>
+              <option>Maquillaje Profesional</option>
+              <option>Otros Servicios</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Mensaje (opcional)</label>
+            <textarea id="f-msg" class="form-control" rows="3" placeholder="Cuéntanos qué buscas..."></textarea>
+          </div>
+          <button type="submit" class="btn-form">
+            <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <a href="#" class="footer-logo">Cosmétics</a>
+        <p class="footer-tagline">Belleza que realza tu esencia. Productos originales, atención personalizada y amor en cada detalle.</p>
+        <div class="footer-social">
+          <a href="https://wa.me/593939675278" class="s-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://instagram.com/cosmeticos" class="s-btn" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+          <a href="https://facebook.com/cosmeticos" class="s-btn" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://tiktok.com/@cosmeticos" class="s-btn" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Navegación</h4>
+        <ul class="footer-links">
+          <li><a href="#products">Productos</a></li>
+          <li><a href="#benefits">Beneficios</a></li>
+          <li><a href="#testimonials">Reseñas</a></li>
+          <li><a href="#contact">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Contacto</h4>
+        <ul class="footer-links">
+          <li><a href="https://wa.me/593939675278">+593 939 675 278</a></li>
+          <li><a href="https://instagram.com/cosmeticos">@cosmeticos</a></li>
+          <li>Montecristi, Manabí</li>
+          <li>Lun–Sáb: 9h a 19h</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Cosmétics — Todos los derechos reservados.</span>
+      <span>Hecho con <i class="fas fa-heart" style="color:var(--rose);"></i> para ti</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/593939675278?text=Hola! Vine desde el sitio web y me gustaría más información" id="wpp-float" target="_blank" rel="noopener">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 10);
+  }, {passive: true});
+
+  // Hamburger
+  const hamBtn = document.getElementById('ham-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamBtn.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamBtn.querySelectorAll('span')[0].style.transform = open ? 'rotate(45deg) translate(5px,5px)' : '';
+    hamBtn.querySelectorAll('span')[1].style.opacity = open ? '0' : '1';
+    hamBtn.querySelectorAll('span')[2].style.transform = open ? 'rotate(-45deg) translate(5px,-5px)' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamBtn.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+  }));
+
+  // Fade in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('in'), i * 70);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.12});
+  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+
+  // Contact form
+  document.getElementById('contact-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const phone = document.getElementById('f-phone').value;
+    const service = document.getElementById('f-service').value;
+    const msg = document.getElementById('f-msg').value;
+    const text = `¡Hola! Me gustaría agendar una cita:\n\n• WhatsApp: ${phone}\n• Servicio: ${service}\n• Mensaje: ${msg || 'Sin mensaje'}`;
+    window.open(`https://wa.me/593939675278?text=${encodeURIComponent(text)}`, '_blank');
+    e.target.reset();
+  });
+</script>
+</body>
+</html>
